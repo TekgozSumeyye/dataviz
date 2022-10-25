@@ -20,7 +20,7 @@ N2 <- nrow(Portuguese)
 #Pour la base de donnee maths, il y a 395 observations et 33 variables.
 #Pour la base de donnee portuguese, il y a 649 observations et 33 variables identiques avec la 1ere bdd. 
 
-fulldata<-bind_rows(maths, Portuguese)
+fulldt<-bind_rows(maths, Portuguese)
 nrow(fulldt)
 str(fulldt)
 #
