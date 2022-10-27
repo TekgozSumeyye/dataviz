@@ -7,12 +7,12 @@ Portuguese <- read_csv("Portuguese.csv")
 
     ####Introduction####
 
-#Ces données portent sur les résultats des élèves dans l'enseignement 
-#secondaire de deux écoles portugaises. Les attributs des données 
-#comprennent les notes des élèves, les caractéristiques démographiques, 
-#sociales et scolaires, et ont été collectés à l'aide de rapports et de 
-#questionnaires scolaires. Deux ensembles de données sont fournis concernant
-#les performances dans deux matières distinctes : Les mathématiques (mat) et
+#Ces donnÃ©es portent sur les rÃ©sultats des Ã©lÃ¨ves dans l'enseignement 
+#secondaire de deux Ã©coles portugaises. Les attributs des donnÃ©es 
+#comprennent les notes des Ã©lÃ¨ves, les caractÃ©ristiques dÃ©mographiques, 
+#sociales et scolaires, et ont Ã©tÃ© collectÃ©s Ã  l'aide de rapports et de 
+#questionnaires scolaires. Deux ensembles de donnÃ©es sont fournis concernant
+#les performances dans deux matiÃ¨res distinctes : Les mathÃ©matiques (mat) et
 #la langue portugaise (por). 
 
 N1 <- nrow(maths)
@@ -48,7 +48,7 @@ summary(Portuguese)
 
 table(maths$sex)
 
-#Savoir nombre de résultat par variable, ex sexe =2 (h et f)
+#Savoir nombre de rÃ©sultat par variable, ex sexe =2 (h et f)
 #...
 
 ggplot(data=maths, aes(x=sex)) + geom_bar()
@@ -66,3 +66,87 @@ ggplot(fulldt, aes(fulldt$age)) +
 
 ggplot(fulldt, aes(fulldt$sex),) + 
   geom_bar()
+
+
+
+# Analyse globale de la variable sex 
+
+summary(studentmat)
+table(fulldt$sex)
+summary(fulldt$sex)
+hist(table(fulldt$sex))
+
+hist(table(fulldt$sex))
+hist(fulldt$sex)
+
+
+# Graphique de la variable sex
+
+ggplot(fulldt, aes(fulldt$sex))+geom_bar()
+
+
+#Analyse globale de la variable age :
+
+summary(fulldt$age)
+#Graphique de la variable age :
+
+ggplot(fulldt,aes(fulldt$age))+geom_bar()
+
+#Minimum de la variable age :
+min(fulldt$age)
+
+#Maximum de la variable age :
+max(fulldt$age)
+range(fulldt$age)
+
+#Moyenne de l'age
+
+mean(fulldt$age)
+
+#Mediane de l age
+
+median(fulldt$age)
+
+#Variance de la variable age
+
+var(fulldt$age)
+
+#Ecart type de la variable age
+
+sd(fulldt$age)
+
+#Quartille de la variable age
+
+quantile(fulldt$age, probs = 0,25)
+quantile(fulldt$age, probs = 0,75)
+
+# Representation en graphique de la variable age
+
+dotchart(table(fulldt$age))
+dotchart (sort(table(fulldt$age)))
+
+# Analyse globale de la variable school
+
+summary(fulldt$school)
+hist(table(fulldt$school))
+
+hist(table(fulldt$school))
+hist(fulldt$school)
+
+#Graphique de la variable school :
+
+ggplot(fulldt,aes(fulldt$school))+geom_bar()
+
+#Moyenne de school:
+
+mean(fulldt$school)
+
+#Mediane de school :
+
+median(fulldt$school)
+
+# Representation en graphique de la variable school :
+
+dotchart(table(fulldt$school))
+dotchart (sort(table(fulldt$school)))
+
