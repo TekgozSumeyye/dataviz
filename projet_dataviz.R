@@ -169,3 +169,4 @@ ggplot(as.data.frame(table(fulldt$address))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
+table(maths$sex)
