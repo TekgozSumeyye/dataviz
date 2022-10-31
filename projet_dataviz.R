@@ -150,3 +150,22 @@ median(fulldt$school)
 dotchart(table(fulldt$school))
 dotchart (sort(table(fulldt$school)))
 
+
+#Partie sumeyye
+#Table Adresse
+table(fulldt$address)
+table(maths$address)
+table(portuguese$address)
+
+
+as.data.frame(table(fulldt$address))
+ggplot(as.data.frame(table(fulldt$address))) +
+  geom_bar(aes(x = Var1, y = Freq), 
+           stat = 'identity', fill = 'darkgreen') +
+  ggtitle("Basic Bar Plot") +
+  xlab("Nombre de personne") +
+  ylab("COUNT") +
+  theme_bw() +
+  theme(axis.text.x = element_text(face = 'bold', size = 10),
+        axis.text.y = element_text(face = 'bold', size = 10))
+
