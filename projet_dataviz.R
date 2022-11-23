@@ -166,8 +166,9 @@ table(Portuguese$address)
 
 as.data.frame(table(fulldt$address))
 ggplot(as.data.frame(table(fulldt$address))) +
-  geom_bar(aes(x = Var1, y = Freq), 
-           stat = 'identity', fill = 'darkgreen') +
+  geom_bar(aes(x = Var1, y = Freq,  fill = Var1), 
+           stat = 'identity') +
+  scale_fill_manual(values=c( 'green', 'cyan')) +
   ggtitle("Basic Bar Plot") +
   xlab("Adresse") +
   ylab("Effectifs") +
@@ -181,8 +182,9 @@ ggplot(as.data.frame(table(fulldt$address))) +
 
 as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
-  geom_bar(aes(x = Var1, y = Freq), 
-           stat = 'identity', fill = 'darkgreen') +
+  geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
+           stat = 'identity') +
+  scale_fill_manual(values=c('red', 'blue', 'green', 'cyan', 'violet')) +
   ggtitle("Basic Bar Plot") +
   xlab("Job du pere") +
   ylab("Effectifs") +
@@ -196,10 +198,12 @@ ggplot(as.data.frame(table(fulldt$Fjob))) +
 
 as.data.frame(table(fulldt$Mjob))
 ggplot(as.data.frame(table(fulldt$Mjob))) +
-  geom_bar(aes(x = Var1, y = Freq), 
-           stat = 'identity', fill = 'darkgreen') +
+  geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
+           stat = 'identity') +
+  scale_fill_manual(values=c('red', 'blue', 'green', 'cyan', 'violet')) +
   ggtitle("Basic Bar Plot") +
   xlab("Job de la mere") +
   ylab("Effectifs") +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
+        axis.text.y = element_text(face = 'bold', size = 10))
