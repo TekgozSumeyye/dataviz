@@ -159,16 +159,16 @@ dotchart (sort(table(fulldt$school)))
 #Partie sumeyye
 #ADAPTER LES COULEURS
 #Table Adresse
-table(fulldt$address)
-table(maths$address)
-table(Portuguese$address)
+
+palette <- c("#E3693E", "#E39A3E", "#2E6A91", "#2B9E67",
+             "#41B4CF","#516ED6","#FFC84B","#FFA44B")
 
 
 as.data.frame(table(fulldt$address))
 ggplot(as.data.frame(table(fulldt$address))) +
   geom_bar(aes(x = Var1, y = Freq,  fill = Var1), 
            stat = 'identity') +
-  scale_fill_manual(values=c( 'green', 'cyan')) +
+  scale_fill_manual(values=c( '#2B9E67', '#FFA44B')) +
   ggtitle("Basic Bar Plot") +
   xlab("Adresse") +
   ylab("Effectifs") +
@@ -184,7 +184,7 @@ as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
            stat = 'identity') +
-  scale_fill_manual(values=c('red', 'blue', 'green', 'cyan', 'violet')) +
+  scale_fill_manual(values=palette) +
   ggtitle("Basic Bar Plot") +
   xlab("Job du pere") +
   ylab("Effectifs") +
@@ -195,12 +195,11 @@ ggplot(as.data.frame(table(fulldt$Fjob))) +
 #Emploi de la mere
 #Table Adresse
 
-
 as.data.frame(table(fulldt$Mjob))
 ggplot(as.data.frame(table(fulldt$Mjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
            stat = 'identity') +
-  scale_fill_manual(values=c('red', 'blue', 'green', 'cyan', 'violet')) +
+  scale_fill_manual(values=palette) +
   ggtitle("Basic Bar Plot") +
   xlab("Job de la mere") +
   ylab("Effectifs") +
