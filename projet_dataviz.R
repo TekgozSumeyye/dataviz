@@ -10,12 +10,12 @@ Portuguese <- read_csv("Portuguese.csv")
 
 ####Introduction####
 
-#Ces donnÈes portent sur les rÈsultats des ÈlËves dans l'enseignement 
-#secondaire de deux Ècoles portugaises. Les attributs des donnÈes 
-#comprennent les notes des ÈlËves, les caractÈristiques dÈmographiques, 
-#sociales et scolaires, et ont ÈtÈ collectÈs ‡ l'aide de rapports et de 
-#questionnaires scolaires. Deux ensembles de donnÈes sont fournis concernant
-#les performances dans deux matiËres distinctes : Les mathÈmatiques (mat) et
+#Ces donn√©es portent sur les r√©sultats des √©l√®ves dans l'enseignement 
+#secondaire de deux √©coles portugaises. Les attributs des donn√©es 
+#comprennent les notes des √©l√®ves, les caract√©ristiques d√©mographiques, 
+#sociales et scolaires, et ont √©t√© collect√©s √† l'aide de rapports et de 
+#questionnaires scolaires. Deux ensembles de donn√©es sont fournis concernant
+#les performances dans deux mati√®res distinctes : Les math√©matiques (mat) et
 #la langue portugaise (por). 
 
 N1 <- nrow(maths)
@@ -51,11 +51,11 @@ maths_sex_n <- aggregate (x = maths$sex,
                           by = list(maths$sex),
                           FUN = length
 )
-barplot(table(fulldt$sex), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 2, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 Ècoles",xlab="Sexe",ylab="Effectifs")
-#Il y a 591 filles et 453 garcons au sein des 2 Ècoles
+barplot(table(fulldt$sex), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 2, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 √©coles",xlab="Sexe",ylab="Effectifs")
+#Il y a 591 filles et 453 garcons au sein des 2 √©coles
 #Graphique sexe a GP
 table(fulldt$sex, fulldt$school)
-barplot(table(fulldt$sex, fulldt$school), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 4, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 Ècoles",xlab="Sexe",ylab="Effectifs")
+barplot(table(fulldt$sex, fulldt$school), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 4, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 √©coles",xlab="Sexe",ylab="Effectifs")
 
 ggplot(fulldt, aes(x = sex, y = school))+
   geom_col(aes(fill = school), width = 0.7)
@@ -176,7 +176,7 @@ ggplot(as.data.frame(table(fulldt$address))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Emploi pËre
+#Emploi p√®re
 #Table Adresse
 
 
@@ -206,3 +206,63 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
+
+
+## Essais Juliette
+# Croisement de certaines variables :
+# Alcool / sexe
+
+install.packages("esquisses")
+library(esquisse)
+library(ggplot2)
+
+# La consommation d'alcool la semaine selon le sexe
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = sex) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool en semaine (1 √©tant le plus faible)", y = "Nombre d'√©l√®ves",
+    title = "Consommation d'alcool en semaine selon le sexe ",
+    fill = "sexe"
+  ) +
+  theme_minimal()
+
+# La consommation d'alcool le week-end selon le sexe
+
+ggplot(fulldt) +
+  aes(x = Walc, fill = sex) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool pendant le week-end (1 √©tant le plus faible)", y = "Nombre d'√©l√®ves", 
+       title = "Consommation d'alcool le week-end chez les √©l√®ves selon le sexe ", 
+       fill = "sexe") +
+  theme_minimal()
+
+# Consommation d'alcool semaine et week-end confondus :
+
+alc <- c(fulldt$Dalc, fulldt$Walc)
+view(alc)
+
+ggplot(fulldt) +
+  aes(x = alc, fill = sex) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Degr√© de consommation d'alcool (1 √©tant le plus faible)", y = "Nombre d'√©l√®ves", 
+       title = "Consommation d'alcool chez les √©l√®ves selon le sexe ", 
+       fill = "sexe") +
+  theme_minimal()
+## -> √ßa marche pas! 
+
+# La consommation d'alcool la semaine selon l'environnement (rural/urbain)
+
+ggplot(fulldt) +
+ aes(x = Walc, fill = address) +
+ geom_histogram(bins = 30L) +
+ scale_fill_hue(direction = 1) +
+ labs(x = "Consommation d'alcool pendant leweek-end ", y = "El√®ves d√©clarant boire le week-end", 
+ title = "Consommation d'alcool le week-end chez les √©l√®ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+ fill = "Cadre de vie (R = rural, U = Urbain)") +
+ theme_minimal()
+
+
