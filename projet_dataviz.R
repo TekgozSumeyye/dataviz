@@ -1,5 +1,6 @@
 #TELECHARGEMENT DES LIBRAIRIES
 library(readr)
+library(coefplot)
 library(ggplot2)
 library(labelled)
 library(dplyr)
@@ -137,9 +138,110 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
 
 #Ici aussi, other se démarque des autres, suivi de services
 
+#Peut etre rajouter d'autres graphiques pour la visualisation? demander au socio
+
+#### III. Visualision des données afin d'établir une éventuelle corrélation entre la consommation d'alcool et les résultats scolaires
+
+#a)profil général des consommateurs d'alcool, afin d'établir une première typologie général :
+
+#Visualisation des consommations d'alcool weekend et semaine
+
+table(fulldt$Walc)
+
+ggplot(fulldt) +
+  aes(x = Walc) +
+  geom_histogram(bins = 30L, fill = "#112446") +
+  theme_minimal()
+
+table(fulldt$Dalc)
+
+ggplot(fulldt) +
+  aes(x = Dalc) +
+  geom_histogram(bins = 30L, fill = "#112446") +
+  theme_minimal()
+#Bcp plus de consommation le weekend ->faire analyse approfondie
+#Consommation modéré en semaine alors que wk il a plus de répartition pour la consommation
+
+#Impact alcool sur G3
+cor1 <- G3 ~ Walc + Dalc
+lm1<-lm(cor1 , data = fulldt)
+coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
+
+#La consommation d'alcool en semaine a plus d'impact négative sur les résultats G3 que la consommation le weekend
+#Dalc= -0.39 et walc -0.17
+
+cor2 <- age ~ Walc + Dalc
+lm2<-lm(cor2 , data = fulldt)
+coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
+#La consommation d'alcool en semaine dépend plus de l'age que la consommation le wk
+
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
+
+#Les femmes ont une consommation plutot modérer que les hommes, on retrouve plus les H dans cat 5
+
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
+
+#j'ai moi même du mal à interpréter ca
+ggplot(fulldt, aes(x = Walc, y = Dalc , shape = sex, color = sex, size = freetime))+ geom_boxplot()
+
+
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = age, size = age) +
+  geom_point(shape = "circle") +
+  scale_color_distiller(palette = "Reds", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction du sexe"
+  ) +
+  theme_bw()
 
 
 
+#Consommation d'alcool selon job mere
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = Mjob, size = Mjob) +
+  geom_jitter() +
+  scale_color_viridis_d(option = "plasma", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction du job de la mere"
+  ) +
+  theme_bw()
+
+
+#Notes G3
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = school, size = G3) +
+  geom_jitter() +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction G3 et école"
+  ) +
+  theme_bw()
+
+ggplot(fulldt) +
+  aes(x = G3, y = sex) +
+  geom_boxplot(fill = "#BDD3E8") +
+  labs(x = "Notes G3", y = "Sexe", title = "Boxplot") +
+  theme_bw()
+
+ggplot(fulldt) +
+  aes(x = G3, y = Mjob, fill = Mjob) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "OrRd", direction = 1) +
+  labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
+  theme_bw()
+
+ggplot(fulldt) +
+  aes(x = G3, y = Fjob, fill = Fjob) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "OrRd", direction = 1) +
+  labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
+  theme_bw()
 
 
 
