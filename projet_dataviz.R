@@ -38,106 +38,18 @@ str(fulldt)
 #### II. Visualisation des donnees####
 
 # a) Ecole
-<<<<<<< Updated upstream
-aggregate (x = maths$school,
-           by = list(maths$school),
-           FUN = length
-)
-#Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira.
-barplot(table(fulldt$school), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 2, name = "Set1"),ylim=c(0,800),main="Repartition de l'ecole",xlab="ecole",ylab="Effectifs")
-
-
-#b) sexe
-maths_sex_n <- aggregate (x = maths$sex,
-                          by = list(maths$sex),
-                          FUN = length
-)
-barplot(table(fulldt$sex), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 2, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 Ã©coles",xlab="Sexe",ylab="Effectifs")
-#Il y a 591 filles et 453 garcons au sein des 2 Ã©coles
-#Graphique sexe a GP
-table(fulldt$sex, fulldt$school)
-barplot(table(fulldt$sex, fulldt$school), beside=TRUE,legend.text = TRUE,col=brewer.pal(n = 4, name = "Set1"),ylim=c(0,600),main="Repartition dU sexe pour les 2 Ã©coles",xlab="Sexe",ylab="Effectifs")
-
-ggplot(fulldt, aes(x = sex, y = school))+
-  geom_col(aes(fill = school), width = 0.7)
-#Demander comment faire  geom_text(aes(y = school, label = sex, group =sex), color = "white")
-
-table(maths$sex)
-ggplot(data=maths, aes(x=sex)) + geom_bar()
-
-
-table(fulldt$sex, fulldt$age)
-ggplot(fulldt, aes(fulldt$age)) + 
-  geom_bar()
-
-ggplot(fulldt, aes(fulldt$sex),) + 
-  geom_bar()
-
-
-
-# Analyse globale de la variable sex 
-
-summary(studentmat)
-table(fulldt$sex)
-summary(fulldt$sex)
-hist(table(fulldt$sex))
-
-hist(table(fulldt$sex))
-hist(fulldt$sex)
-
-
-# Graphique de la variable sex
-
-ggplot(fulldt, aes(fulldt$sex))+geom_bar()
-
-
-#Analyse globale de la variable age :
-
-summary(fulldt$age)
-#Graphique de la variable age :
-
-ggplot(fulldt,aes(fulldt$age))+geom_bar()
-
-#Minimum de la variable age :
-min(fulldt$age)
-
-#Maximum de la variable age :
-max(fulldt$age)
-range(fulldt$age)
-
-#Moyenne de l'age
-
-mean(fulldt$age)
-
-#Mediane de l age
-
-median(fulldt$age)
-
-#Variance de la variable age
-
-var(fulldt$age)
-
-#Ecart type de la variable age
-
-sd(fulldt$age)
-
-#Quartille de la variable age
-=======
->>>>>>> Stashed changes
-
-as.data.frame(table(fulldt$school))
 ggplot(as.data.frame(table(fulldt$school))) +
-  geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
-           stat = 'identity') +
-  scale_fill_manual(values=palette) +
-  ggtitle("Répartition de l'école") +
-  xlab("Ecole") +
-  ylab("Effectifs") +
-  theme_bw() +
-  theme(axis.text.x = element_text(face = 'bold', size = 10),
-        axis.text.y = element_text(face = 'bold', size = 10))
+     geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
+                           stat = 'identity') +
+     scale_fill_manual(values=palette) +
+     ggtitle("Répartition de l'école") +
+     xlab("Ecole") +
+     ylab("Effectifs") +
+     theme_bw() +
+     theme(axis.text.x = element_text(face = 'bold', size = 10),
+                     axis.text.y = element_text(face = 'bold', size = 10))
 
-
+#Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira.
 
 #b) sexe en fonction de l'école
 ggplot(fulldt) +
@@ -192,13 +104,9 @@ ggplot(as.data.frame(table(fulldt$address))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-<<<<<<< Updated upstream
-#Emploi pÃ¨re
-#Table Adresse
+#Emploi pere
 
-=======
 #e) Emploi père
->>>>>>> Stashed changes
 
 as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
@@ -227,14 +135,15 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-<<<<<<< Updated upstream
-=======
 #Ici aussi, other se démarque des autres, suivi de services
 
 
 
->>>>>>> Stashed changes
 
+
+
+
+#Partie Juliette qui ne marche pas! 
 ## Essais Juliette
 # Croisement de certaines variables :
 # Alcool / sexe
@@ -249,15 +158,12 @@ ggplot(fulldt) +
   aes(x = Dalc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
-<<<<<<< Updated upstream
   labs(x = "Consommation d'alcool en semaine (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves",
     title = "Consommation d'alcool en semaine selon le sexe ",
     fill = "sexe"
-=======
   labs(x = "Consommation d'alcool en semaine (1 étant le plus faible)", y = "Nombre d'élèves",
        title = "Consommation d'alcool en semaine selon le sexe ",
        fill = "sexe"
->>>>>>> Stashed changes
   ) +
   theme_minimal()
 
@@ -267,13 +173,11 @@ ggplot(fulldt) +
   aes(x = Walc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
-<<<<<<< Updated upstream
   labs(x = "Consommation d'alcool pendant le week-end (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves", 
        title = "Consommation d'alcool le week-end chez les Ã©lÃ¨ves selon le sexe ", 
-=======
+
   labs(x = "Consommation d'alcool pendant le week-end (1 étant le plus faible)", y = "Nombre d'élèves", 
        title = "Consommation d'alcool le week-end chez les élèves selon le sexe ", 
->>>>>>> Stashed changes
        fill = "sexe") +
   theme_minimal()
 
@@ -286,24 +190,22 @@ ggplot(fulldt) +
   aes(x = alc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
-<<<<<<< Updated upstream
   labs(x = "DegrÃ© de consommation d'alcool (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves", 
        title = "Consommation d'alcool chez les Ã©lÃ¨ves selon le sexe ", 
        fill = "sexe") +
   theme_minimal()
+
 ## -> Ã§a marche pas! 
-=======
+  
   labs(x = "Degré de consommation d'alcool (1 étant le plus faible)", y = "Nombre d'élèves", 
        title = "Consommation d'alcool chez les élèves selon le sexe ", 
        fill = "sexe") +
   theme_minimal()
-## -> ça marche pas! 
->>>>>>> Stashed changes
+## -> ça marche pas!
 
 # La consommation d'alcool la semaine selon l'environnement (rural/urbain)
 
 ggplot(fulldt) +
-<<<<<<< Updated upstream
  aes(x = Walc, fill = address) +
  geom_histogram(bins = 30L) +
  scale_fill_hue(direction = 1) +
@@ -313,7 +215,6 @@ ggplot(fulldt) +
  theme_minimal()
 
 
-=======
   aes(x = Walc, fill = address) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
@@ -321,4 +222,3 @@ ggplot(fulldt) +
        title = "Consommation d'alcool le week-end chez les élèves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") +
   theme_minimal()
->>>>>>> Stashed changes
