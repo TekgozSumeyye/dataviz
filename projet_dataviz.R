@@ -13,17 +13,17 @@ Portuguese <- read_csv("Portuguese.csv")
 
 ####I. Introduction####
 
-#Ces données portent sur les résultats des élèves dans l'enseignement 
-#secondaire de deux écoles portugaises. Les attributs des données 
-#comprennent les notes des élèves, les caractéristiques démographiques, 
-#sociales et scolaires, et ont été collectés à l'aide de rapports et de 
-#questionnaires scolaires. Deux ensembles de données sont fournis concernant
-#les performances dans deux matières distinctes : Les mathématiques (mat) et
+#Ces donnÃ©es portent sur les rÃ©sultats des Ã©lÃ¨ves dans l'enseignement 
+#secondaire de deux Ã©coles portugaises. Les attributs des donnÃ©es 
+#comprennent les notes des Ã©lÃ¨ves, les caractÃ©ristiques dÃ©mographiques, 
+#sociales et scolaires, et ont Ã©tÃ© collectÃ©s Ã  l'aide de rapports et de 
+#questionnaires scolaires. Deux ensembles de donnÃ©es sont fournis concernant
+#les performances dans deux matiÃ¨res distinctes : Les mathÃ©matiques (mat) et
 #la langue portugaise (por). 
 
-#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les r�sultats
-#scolaires, l'id�e est de d�terminer plus g�n�ralement quels pourraient �tre les facteurs affectant la
-#r�ussite scolaire dans le contexte des jeux de donn�es dont nous disposons.
+#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les résultats
+#scolaires, l'idée est de déterminer plus généralement quels pourraient être les facteurs affectant la
+#réussite scolaire dans le contexte des jeux de données dont nous disposons.
 
 N1 <- nrow(maths)
 N2 <- nrow(Portuguese)
@@ -43,7 +43,7 @@ ggplot(as.data.frame(table(fulldt$school))) +
      geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
                            stat = 'identity') +
      scale_fill_manual(values=palette) +
-     ggtitle("R�partition de l'�cole") +
+     ggtitle("Répartition de l'école") +
      xlab("Ecole") +
      ylab("Effectifs") +
      theme_bw() +
@@ -52,7 +52,7 @@ ggplot(as.data.frame(table(fulldt$school))) +
 
 #Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira.
 
-#b) sexe en fonction de l'�cole
+#b) sexe en fonction de l'école
 ggplot(fulldt) +
   aes(x = sex, fill = school) +
   geom_bar() +
@@ -60,11 +60,11 @@ ggplot(fulldt) +
   labs(
     x = "Sexe",
     y = "Effectifs",
-    title = "R�partition du sexe en fonction de l'�cole"
+    title = "Répartition du sexe en fonction de l'école"
   ) +
   theme_minimal()
 
-#Il y a 591 filles et 453 garcons au sein des 2 �coles
+#Il y a 591 filles et 453 garcons au sein des 2 écoles
 
 
 #c)Age en fonction du sexe
@@ -75,12 +75,12 @@ ggplot(fulldt) +
   labs(
     x = "Age",
     y = "Effectifs",
-    title = "R�partition de l'�ge en fonction du sexe"
+    title = "Répartition de l'âge en fonction du sexe"
   ) +
   theme_minimal()
 
 #d) Adresse
-#Adresse en fonction de �cole
+#Adresse en fonction de école
 ggplot(fulldt) +
   aes(x = address, fill = school) +
   geom_bar() +
@@ -88,7 +88,7 @@ ggplot(fulldt) +
   labs(
     x = "Adresse",
     y = "Effectif",
-    title = "R�partition de l'adresse (U ou R) en fonction de l'�cole"
+    title = "Répartition de l'adresse (U ou R) en fonction de l'école"
   ) +
   theme_minimal()
 
@@ -107,7 +107,7 @@ ggplot(as.data.frame(table(fulldt$address))) +
 
 #Emploi pere
 
-#e) Emploi p�re
+#e) Emploi père
 
 as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
@@ -120,7 +120,7 @@ ggplot(as.data.frame(table(fulldt$Fjob))) +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
-#Interpr�tation: Nous observons que la cat�gorie "les autres" se d�marque des 3 autres cat�gories (� la maison, sant� et professeurs)
+#Interprétation: Nous observons que la catégorie "les autres" se démarque des 3 autres catégories (à la maison, santé et professeurs)
 
 
 #f) Emploi de la mere
@@ -136,13 +136,13 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Ici aussi, other se d�marque des autres, suivi de services
+#Ici aussi, other se démarque des autres, suivi de services
 
 #Peut etre rajouter d'autres graphiques pour la visualisation? demander au socio
 
-#### III. Visualision des donn�es afin d'�tablir une �ventuelle corr�lation entre la consommation d'alcool et les r�sultats scolaires
+#### III. Visualision des données afin d'établir une éventuelle corrélation entre la consommation d'alcool et les résultats scolaires
 
-#a)profil g�n�ral des consommateurs d'alcool, afin d'�tablir une premi�re typologie g�n�ral :
+#a)profil général des consommateurs d'alcool, afin d'établir une première typologie général :
 
 #Visualisation des consommations d'alcool weekend et semaine
 
@@ -160,28 +160,28 @@ ggplot(fulldt) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
 #Bcp plus de consommation le weekend ->faire analyse approfondie
-#Consommation mod�r� en semaine alors que wk il a plus de r�partition pour la consommation
+#Consommation modéré en semaine alors que wk il a plus de répartition pour la consommation
 
 #Impact alcool sur G3
 cor1 <- G3 ~ Walc + Dalc
 lm1<-lm(cor1 , data = fulldt)
 coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
 
-#La consommation d'alcool en semaine a plus d'impact n�gative sur les r�sultats G3 que la consommation le weekend
+#La consommation d'alcool en semaine a plus d'impact négative sur les résultats G3 que la consommation le weekend
 #Dalc= -0.39 et walc -0.17
 
 cor2 <- age ~ Walc + Dalc
 lm2<-lm(cor2 , data = fulldt)
 coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
-#La consommation d'alcool en semaine d�pend plus de l'age que la consommation le wk
+#La consommation d'alcool en semaine dépend plus de l'age que la consommation le wk
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
 
-#Les femmes ont une consommation plutot mod�rer que les hommes, on retrouve plus les H dans cat 5
+#Les femmes ont une consommation plutot modérer que les hommes, on retrouve plus les H dans cat 5
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
 
-#j'ai moi m�me du mal � interpr�ter ca
+#j'ai moi même du mal à interpréter ca
 ggplot(fulldt, aes(x = Walc, y = Dalc , shape = sex, color = sex, size = freetime))+ geom_boxplot()
 
 
@@ -219,7 +219,7 @@ ggplot(fulldt) +
   labs(
     x = "Consommation alcool semaine",
     y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction G3 et �cole"
+    title = "Nuage de point consommation alcool en fonction G3 et école"
   ) +
   theme_bw()
 
@@ -260,10 +260,10 @@ ggplot(fulldt) +
   aes(x = Dalc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
-  labs(x = "Consommation d'alcool en semaine (1 étant le plus faible)", y = "Nombre d'élèves",
+  labs(x = "Consommation d'alcool en semaine (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves",
     title = "Consommation d'alcool en semaine selon le sexe ",
     fill = "sexe"
-  labs(x = "Consommation d'alcool en semaine (1 �tant le plus faible)", y = "Nombre d'�l�ves",
+  labs(x = "Consommation d'alcool en semaine (1 étant le plus faible)", y = "Nombre d'élèves",
        title = "Consommation d'alcool en semaine selon le sexe ",
        fill = "sexe"
   ) +
@@ -275,11 +275,11 @@ ggplot(fulldt) +
   aes(x = Walc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool pendant le week-end (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves", 
+       title = "Consommation d'alcool le week-end chez les Ã©lÃ¨ves selon le sexe ", 
+
   labs(x = "Consommation d'alcool pendant le week-end (1 étant le plus faible)", y = "Nombre d'élèves", 
        title = "Consommation d'alcool le week-end chez les élèves selon le sexe ", 
-
-  labs(x = "Consommation d'alcool pendant le week-end (1 �tant le plus faible)", y = "Nombre d'�l�ves", 
-       title = "Consommation d'alcool le week-end chez les �l�ves selon le sexe ", 
        fill = "sexe") +
   theme_minimal()
 
@@ -292,18 +292,18 @@ ggplot(fulldt) +
   aes(x = alc, fill = sex) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
+  labs(x = "DegrÃ© de consommation d'alcool (1 Ã©tant le plus faible)", y = "Nombre d'Ã©lÃ¨ves", 
+       title = "Consommation d'alcool chez les Ã©lÃ¨ves selon le sexe ", 
+       fill = "sexe") +
+  theme_minimal()
+
+## -> Ã§a marche pas! 
+  
   labs(x = "Degré de consommation d'alcool (1 étant le plus faible)", y = "Nombre d'élèves", 
        title = "Consommation d'alcool chez les élèves selon le sexe ", 
        fill = "sexe") +
   theme_minimal()
-
-## -> ça marche pas! 
-  
-  labs(x = "Degr� de consommation d'alcool (1 �tant le plus faible)", y = "Nombre d'�l�ves", 
-       title = "Consommation d'alcool chez les �l�ves selon le sexe ", 
-       fill = "sexe") +
-  theme_minimal()
-## -> �a marche pas!
+## -> ça marche pas!
 
 # La consommation d'alcool la semaine selon l'environnement (rural/urbain)
 
@@ -311,8 +311,8 @@ ggplot(fulldt) +
  aes(x = Walc, fill = address) +
  geom_histogram(bins = 30L) +
  scale_fill_hue(direction = 1) +
- labs(x = "Consommation d'alcool pendant leweek-end ", y = "Elèves déclarant boire le week-end", 
- title = "Consommation d'alcool le week-end chez les élèves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+ labs(x = "Consommation d'alcool pendant leweek-end ", y = "ElÃ¨ves dÃ©clarant boire le week-end", 
+ title = "Consommation d'alcool le week-end chez les Ã©lÃ¨ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
  fill = "Cadre de vie (R = rural, U = Urbain)") +
  theme_minimal()
 
@@ -320,7 +320,24 @@ ggplot(fulldt) +
   aes(x = Walc, fill = address) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
-  labs(x = "Consommation d'alcool pendant leweek-end ", y = "El�ves d�clarant boire le week-end", 
-       title = "Consommation d'alcool le week-end chez les �l�ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Elèves déclarant boire le week-end", 
+       title = "Consommation d'alcool le week-end chez les élèves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") +
   theme_minimal()
+       
+
+# Soutien scolaire et consommation d'alcool en semaine
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = schoolsup) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Quantité d'alcool consommée en semaine (1 étant le plus faible)",
+    y = "nombre d'élèves",
+    title = "Soutien scoalire et consommation d'alcool le week-end",
+    fill = "Bénéficie de soutien scolaire"
+  ) +
+  theme_minimal()
+
+##=> Les élèves qui déclarent consommer peu d'alcool en semaine, sont plus nombreux à bénéficier de soutien scolaire
