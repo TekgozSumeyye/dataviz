@@ -248,7 +248,22 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
 
+
+
 #Faire boxplot pour etudes pere et mere 
+
+ggplot(fulldt) +
+  aes(x = G3, y = guardian, fill = guardian) +
+  geom_boxplot() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Notes G3",
+    y = "Tuteur",
+    title = "Boxplot impact tuteur eleve sur G3"
+  ) +
+  theme_minimal()
+#Analyser Sumeyye
+
 #b)Recherche plus poussée des raisons d'une consommation d'alcool «excessive» :
 
 
@@ -337,19 +352,31 @@ ggplot(fulldt) +
  aes(x = Walc, fill = address) +
  geom_histogram(bins = 30L) +
  scale_fill_hue(direction = 1) +
+<<<<<<< Updated upstream
  labs(x = "Consommation d'alcool pendant leweek-end ", y = "ElÃƒÂ¨ves dÃƒÂ©clarant boire le week-end", 
  title = "Consommation d'alcool le week-end chez les ÃƒÂ©lÃƒÂ¨ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
  fill = "Cadre de vie (R = rural, U = Urbain)") +
  theme_minimal()
+=======
+ labs(x = "Consommation d'alcool pendant leweek-end ", y = "ElÃ¨ves dÃ©clarant boire le week-end", 
+ title = "Consommation d'alcool le week-end chez les Ã©lÃ¨ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+ fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
+>>>>>>> Stashed changes
 
 
   aes(x = Walc, fill = address) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
+<<<<<<< Updated upstream
   labs(x = "Consommation d'alcool pendant leweek-end ", y = "ElÃ¨ves dÃ©clarant boire le week-end", 
        title = "Consommation d'alcool le week-end chez les Ã©lÃ¨ves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") +
   theme_minimal()
+=======
+  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Elèves déclarant boire le week-end", 
+       title = "Consommation d'alcool le week-end chez les élèves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+       fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
+>>>>>>> Stashed changes
        
 
 # Soutien scolaire et consommation d'alcool en semaine
