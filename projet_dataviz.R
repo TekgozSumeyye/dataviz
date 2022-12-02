@@ -52,7 +52,7 @@ ggplot(as.data.frame(table(fulldt$school))) +
 
 #Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira.
 
-#b) sexe en fonction de l'école
+# b) sexe en fonction de l'école
 ggplot(fulldt) +
   aes(x = sex, fill = school) +
   geom_bar() +
@@ -67,7 +67,7 @@ ggplot(fulldt) +
 #Il y a 591 filles et 453 garcons au sein des 2 écoles
 
 
-#c)Age en fonction du sexe
+# c)Age en fonction du sexe
 ggplot(fulldt) +
   aes(x = age, fill = sex) +
   geom_histogram(bins = 30L) +
@@ -79,7 +79,7 @@ ggplot(fulldt) +
   ) +
   theme_minimal()
 
-#d) Adresse
+# d) Adresse
 #Adresse en fonction de école
 ggplot(fulldt) +
   aes(x = address, fill = school) +
@@ -107,7 +107,7 @@ ggplot(as.data.frame(table(fulldt$address))) +
 
 #Emploi pere
 
-#e) Emploi père
+#e) Emploi pere
 
 as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
@@ -142,9 +142,9 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
 
 #### III. Visualision des données afin d'établir une éventuelle corrélation entre la consommation d'alcool et les résultats scolaires
 
-#a)profil général des consommateurs d'alcool, afin d'établir une première typologie général :
+  #a)profil general des consommateurs d'alcool, afin d'établir une première typologie général :
 
-#Visualisation des consommations d'alcool weekend et semaine
+  #Visualisation des consommations d'alcool weekend et semaine
 
 table(fulldt$Walc)
 
@@ -176,15 +176,15 @@ coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
 #La consommation d'alcool en semaine dépend plus de l'age que la consommation le wk
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
-
+#Analuse Aurore
 #Les femmes ont une consommation plutot modérer que les hommes, on retrouve plus les H dans cat 5
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
-
+#Analyse Doriane
 #j'ai moi même du mal à interpréter ca
 ggplot(fulldt, aes(x = Walc, y = Dalc , shape = sex, color = sex, size = freetime))+ geom_boxplot()
 
-
+#A corriger 
 ggplot(fulldt) +
   aes(x = Dalc, y = Walc, colour = age, size = age) +
   geom_point(shape = "circle") +
@@ -209,7 +209,7 @@ ggplot(fulldt) +
     title = "Nuage de point consommation alcool en fonction du job de la mere"
   ) +
   theme_bw()
-
+#Analyse Hugo
 
 #Notes G3
 ggplot(fulldt) +
@@ -222,7 +222,11 @@ ggplot(fulldt) +
     title = "Nuage de point consommation alcool en fonction G3 et école"
   ) +
   theme_bw()
+#Analyse Juliette
 
+table(fulldt$G3)
+
+#Sumeyye
 ggplot(fulldt) +
   aes(x = G3, y = sex) +
   geom_boxplot(fill = "#BDD3E8") +
@@ -236,12 +240,21 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
 
+#Aurore
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
+
+#Faire boxplot pour etudes pere et mere 
+#b)Recherche plus pouss�e des raisons d'une consommation d'alcool �excessive� :
+
+
+
+
+
 
 
 
