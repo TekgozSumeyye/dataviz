@@ -247,6 +247,8 @@ ggplot(fulldt) +
 
 #Partie Juliette
 
+library(ggplot2)
+
 #Consommation d'alcool selon la taille de la famille
 
 ggplot(fulldt) +
@@ -264,9 +266,6 @@ ggplot(fulldt) +
 ## Encore essais Juliette
 # Croisement de certaines variables :
 # Alcool / sexe
-
-library(esquisse)
-library(ggplot2)
 
 # La consommation d'alcool la semaine selon le sexe
 
