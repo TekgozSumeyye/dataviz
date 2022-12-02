@@ -245,12 +245,26 @@ ggplot(fulldt) +
 
 
 
-#Partie Juliette qui ne marche pas! 
-## Essais Juliette
+#Partie Juliette
+
+#Consommation d'alcool selon la taille de la famille
+
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = famsize, size = famsize) +
+  geom_jitter() +
+  scale_color_viridis_d(option = "plasma", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction du job de la mere"
+  ) +
+  theme_bw()
+
+
+## Encore essais Juliette
 # Croisement de certaines variables :
 # Alcool / sexe
 
-install.packages("esquisses")
 library(esquisse)
 library(ggplot2)
 
