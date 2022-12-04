@@ -428,3 +428,8 @@ ggplot(fulldt) +
                 theme_minimal()
               
               # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale. 
+
+              
+              
+#Test Hugo
+              
