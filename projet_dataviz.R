@@ -1,3 +1,8 @@
+#Chemin des bases de donnees
+path <- file.path("C:", "Users", "tekgo", "Documents", "GitHub", "dataviz", fsep="\\")
+setwd(path)
+#R version 4.1.3 (2022-03-10)
+
 #TELECHARGEMENT DES LIBRAIRIES
 library(readr)
 library(coefplot)
@@ -33,7 +38,7 @@ N2 <- nrow(Portuguese)
 fulldt<-bind_rows(maths, Portuguese)
 nrow(fulldt)
 str(fulldt)
-#Avec str, on visualiser les premieres donnees des variables, et on regarde si ce sont des variables qualitative ou quantitatives
+#Avec str, on visualise les premieres donnees des variables, et on regarde si ce sont des variables qualitative ou quantitatives
 
 
 #### II. Visualisation des donnees####
@@ -75,7 +80,7 @@ ggplot(fulldt) +
   labs(
     x = "Age",
     y = "Effectifs",
-    title = "RÃ©partition de l'Ã¢ge en fonction du sexe"
+    title = "Repartition de l'age en fonction du sexe"
   ) +
   theme_minimal()
 
@@ -88,7 +93,7 @@ ggplot(fulldt) +
   labs(
     x = "Adresse",
     y = "Effectif",
-    title = "RÃ©partition de l'adresse (U ou R) en fonction de l'Ã©cole"
+    title = "Repartition de l'adresse (U ou R) en fonction de l'ecole"
   ) +
   theme_minimal()
 
@@ -104,8 +109,6 @@ ggplot(as.data.frame(table(fulldt$address))) +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
-
-#Emploi pere
 
 #e) Emploi pere
 
@@ -138,13 +141,21 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
 
 #Ici aussi, other se dÃ©marque des autres, suivi de services
 
-#Peut etre rajouter d'autres graphiques pour la visualisation? demander au socio
 
-#### III. Visualision des donnÃ©es afin d'Ã©tablir une Ã©ventuelle corrÃ©lation entre la consommation d'alcool et les rÃ©sultats scolaires
 
-  #a)profil general des consommateurs d'alcool, afin d'Ã©tablir une premiÃ¨re typologie gÃ©nÃ©ral :
+#### III. Visualision des donnÃ©es afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
+
+  #a)profil general des consommateurs d'alcool, afin d'etablir une premiere typologie general :
 
   #Visualisation des consommations d'alcool weekend et semaine
+#Consommation semaine
+table(fulldt$Dalc)
+
+ggplot(fulldt) +
+  aes(x = Dalc) +
+  geom_histogram(bins = 30L, fill = "#112446") +
+  theme_minimal()
+#En semaine, la consommation d'alcool est plutot mod�rer (tres peu de consommation)
 
 table(fulldt$Walc)
 
@@ -152,28 +163,23 @@ ggplot(fulldt) +
   aes(x = Walc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-
-table(fulldt$Dalc)
-
-ggplot(fulldt) +
-  aes(x = Dalc) +
-  geom_histogram(bins = 30L, fill = "#112446") +
-  theme_minimal()
-#Bcp plus de consommation le weekend ->faire analyse approfondie
-#Consommation modÃ©rÃ© en semaine alors que wk il a plus de rÃ©partition pour la consommation
+#Il y a beaucoup plus de consommation le weekend, �tant donn� qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
 
 #Impact alcool sur G3
 cor1 <- G3 ~ Walc + Dalc
 lm1<-lm(cor1 , data = fulldt)
 coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
-
-#La consommation d'alcool en semaine a plus d'impact nÃ©gative sur les rÃ©sultats G3 que la consommation le weekend
+#La consommation d'alcool en semaine a plus d'impact negatif sur les resultats scolaires G3 que la consommation le weekend. 
+#Les deux coefficient est negative, mais l'intervalle de confiance de Walc couvre 0, donc le coefficient de Walc n'est pas significatif. 
+#Cela peut etre du au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux revisions donc leurs notes sont impact�s. 
 #Dalc= -0.39 et walc -0.17
 
 cor2 <- age ~ Walc + Dalc
 lm2<-lm(cor2 , data = fulldt)
 coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
-#La consommation d'alcool en semaine dÃ©pend plus de l'age que la consommation le wk
+#Ici, nous chercons � comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
+#Les deux coefficient sont positive, mais etant donne que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a dalc. 
+#La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention � leurs consommations d'alcool en semaine que en weekend.  
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
 #Analuse Aurore
@@ -181,20 +187,6 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_j
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
 #Analyse Doriane
-#j'ai moi mÃªme du mal Ã  interprÃ©ter ca
-ggplot(fulldt, aes(x = Walc, y = Dalc , shape = sex, color = sex, size = freetime))+ geom_boxplot()
-
-#A corriger 
-ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = age, size = age) +
-  geom_point(shape = "circle") +
-  scale_color_distiller(palette = "Reds", direction = 1) +
-  labs(
-    x = "Consommation alcool semaine",
-    y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction du sexe"
-  ) +
-  theme_bw()
 
 
 
@@ -255,6 +247,10 @@ ggplot(fulldt) +
   geom_boxplot(fill = "#BDD3E8") +
   labs(x = "Notes G3", y = "Sexe", title = "Boxplot") +
   theme_bw()
+#Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
+#Les notes m�dians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
+#Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
+#Cela s'explique que les notes des filles sont similaire et que globalement les filles ont des notes eleves alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
@@ -262,6 +258,11 @@ ggplot(fulldt) +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
+#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup�rieures ou inf�rieures aux limites d�finies par les moustaches. 
+#On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (m�diant) que les meres aux foyers et "autres". 
+#Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
+#Par contre, l'icart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
+
 
 #Aurore
 ggplot(fulldt) +
