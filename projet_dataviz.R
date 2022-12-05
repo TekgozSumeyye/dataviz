@@ -18,17 +18,17 @@ Portuguese <- read_csv("Portuguese.csv")
 
 ####I. Introduction####
 
-#Ces donnÃƒÂ©es portent sur les rÃƒÂ©sultats des ÃƒÂ©lÃƒÂ¨ves dans l'enseignement 
-#secondaire de deux ÃƒÂ©coles portugaises. Les attributs des donnÃƒÂ©es 
-#comprennent les notes des ÃƒÂ©lÃƒÂ¨ves, les caractÃƒÂ©ristiques dÃƒÂ©mographiques, 
-#sociales et scolaires, et ont ÃƒÂ©tÃƒÂ© collectÃƒÂ©s ÃƒÂ  l'aide de rapports et de 
-#questionnaires scolaires. Deux ensembles de donnÃƒÂ©es sont fournis concernant
-#les performances dans deux matiÃƒÂ¨res distinctes : Les mathÃƒÂ©matiques (mat) et
+#Ces donnees portent sur les resultats des eleves dans l'enseignement 
+#secondaire de deux ecoles portugaises. Les attributs des donnees 
+#comprennent les notes des eleves, les caracteristiques demographiques, 
+#sociales et scolaires, et ont ete collectes a l'aide de rapports et de 
+#questionnaires scolaires. Deux ensembles de donnees sont fournis concernant
+#les performances dans deux matieres distinctes : Les mathematiques (mat) et
 #la langue portugaise (por). 
 
-#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les rÃ©sultats
-#scolaires, l'idÃ©e est de dÃ©terminer plus gÃ©nÃ©ralement quels pourraient Ãªtre les facteurs affectant la
-#rÃ©ussite scolaire dans le contexte des jeux de donnÃ©es dont nous disposons.
+#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les resultats
+#scolaires, l'idee est de determiner plus geralement quels pourraient etre les facteurs affectant la
+#reussite scolaire dans le contexte des jeux de donnees dont nous disposons.
 
 N1 <- nrow(maths)
 N2 <- nrow(Portuguese)
@@ -48,7 +48,7 @@ ggplot(as.data.frame(table(fulldt$school))) +
      geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
                            stat = 'identity') +
      scale_fill_manual(values=palette) +
-     ggtitle("RÃ©partition de l'Ã©cole") +
+     ggtitle("Repartition de l'ecole") +
      xlab("Ecole") +
      ylab("Effectifs") +
      theme_bw() +
@@ -57,7 +57,7 @@ ggplot(as.data.frame(table(fulldt$school))) +
 
 #Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira.
 
-# b) sexe en fonction de l'Ã©cole
+# b) sexe en fonction de l'ecole
 ggplot(fulldt) +
   aes(x = sex, fill = school) +
   geom_bar() +
@@ -65,11 +65,11 @@ ggplot(fulldt) +
   labs(
     x = "Sexe",
     y = "Effectifs",
-    title = "RÃ©partition du sexe en fonction de l'Ã©cole"
+    title = "Repartition du sexe en fonction de l'ecole"
   ) +
   theme_minimal()
 
-#Il y a 591 filles et 453 garcons au sein des 2 Ã©coles
+#Il y a 591 filles et 453 garcons au sein des 2 ecoles
 
 
 # c)Age en fonction du sexe
@@ -85,7 +85,7 @@ ggplot(fulldt) +
   theme_minimal()
 
 # d) Adresse
-#Adresse en fonction de Ã©cole
+#Adresse en fonction de ecole
 ggplot(fulldt) +
   aes(x = address, fill = school) +
   geom_bar() +
@@ -123,7 +123,7 @@ ggplot(as.data.frame(table(fulldt$Fjob))) +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
-#InterprÃ©tation: Nous observons que la catÃ©gorie "les autres" se dÃ©marque des 3 autres catÃ©gories (Ã  la maison, santÃ© et professeurs)
+#Interpretation: Nous observons que la categorie "les autres" se demarque des 3 autres catÃ©gories (a la maison, sante et professeurs)
 
 
 #f) Emploi de la mere
@@ -139,11 +139,11 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Ici aussi, other se dÃ©marque des autres, suivi de services
+#Ici aussi, other se demarque des autres, suivi de services
 
 
 
-#### III. Visualision des donnÃ©es afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
+#### III. Visualision des donnees afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
 
   #a)profil general des consommateurs d'alcool, afin d'etablir une premiere typologie general :
 
@@ -183,7 +183,7 @@ coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
 #Analuse Aurore
-#Les femmes ont une consommation plutot modÃ©rer que les hommes, on retrouve plus les H dans cat 5
+#Les femmes ont une consommation plutot moderer que les hommes, on retrouve plus les H dans cat 5
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
 #Analyse Doriane
@@ -211,30 +211,30 @@ ggplot(fulldt) +
   labs(
     x = "Consommation alcool semaine",
     y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction G3 et Ã©cole"
+    title = "Nuage de point consommation alcool en fonction G3 et ecole"
   ) +
   theme_bw()
 
-# Ici on utilise le nuage de point pour montrer la différence entre école et l'influence de la consommation d'alcool sur les notes aux examens finaux (G3) 
-# car la fonction nuage de point nous permet ici de facilement montrer (ou non) la disparité entre les deux écoles et surtout de faire ressortir les tendances statistiques 
-# sur la consommation d'alcool des élèves et peut être d'établir une influence sur les résultats finaux aux examens des élèves.
-# Le graphique se lit comme suit : les points en haut à droite sont ceux qui consomment le plus d'alcool à la fois en weekend et en semaine (ceux se rapprochant le plus du 5 sur l'abscisse et l'ordonnée).
-# A l'inverse, ceux étant le plus en bas à gauche (les plus proches de 1) sont ceux consommant le moins, voir pas d'alcool. En haut à gauche, se situent les personnes consommant exclusivement le weekend (1 à l'abcisse et 5 à l'ordonnée),
-# et ceux étant le plus en bas à droite sont ceux qui consomment de l'alcool exclusivement en semaine (5 à l'abscisse et 1 à l'ordonnée).
-# Le premier résultat que l'on remarque est que la tendance à la consommation d'alcool est beaucoup plus importante durant le weekend que durant la semaine malgrès quelques exceptions.
-# On peut expliquer cette tendance par le fait que la consommation d'alcool à l'adolescence et pour les jeunes adultes soient surtout liée à des moments sociabilités entre groupes de pair.
-# Les étudiants ayant cours en semaine, la plupart des activités sociales sont donc organisées en fin de semaine, en weekend et ces activités sont le moment propices à la consommation d'alcool en vue de sociabiliser (sorties en bars, boites, soirée chez quelqu'un).
-# Le deuxième résultat que l'on peut noter est que les élèves de Gabirel Pereira (en rouge) sont plus nombreux à consommer de l'alcool que ceux de Mousinho da Silveira (en bleu).
-# Les élèves de GP sont aussi surtout beaucou plus représenter dans des consommations intensives et notamment celles faites en semaines.
-# Difficile de dire si la différence est assez grande pour être significative. Un début d'analyse pour expliquer cette différence serait que Gabriel Pereira
-# est une école publique et donc que les élèves aient une plus grande liberté et moins d'attente au niveau du corps enseignant.
-# Le troisième résultat est que l'on remarque que les résultats les plus bas (0, 5, 10) ont tendance à augmenter avec la consommation d'alcool
-# et surtout avec la consommation d'alcool en semaine. On ne peut pas affirmer que ce résultat soit significatif au vu de la présence de très nombreux non-buveurs ou buveurs occasionnelle.
-# Cependant on peut imaginer une hypothèse qui est que ceux qui consomment en semaine sont probablement victime d'addiction, d'alcoolisme
-# étant donné que l'addiction à l'alcool se caractèrise par une consommation presque journalière. On manque d'élément pour approuver la validation d'une tel hypothèse,
-# mais tout comment l'addiction à la marijuana a des conséquences sur les notes, l'addiction à l'alcool pourrait entrainer des conséquences sur les notes finales comme le montre le graphique.
-# Cependant, tout comme l'addiction à la marijuana, il faut voir si c'est l'addiction à l'alcool en elle même qui cause la baisse des notes ou un environnement social particulièrement précaire
-# qui causerait cette baisse des notes et cette addiction à la fois. C'est pour celà que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des élèves.
+# Ici on utilise le nuage de point pour montrer la difference entre école et l'influence de la consommation d'alcool sur les notes aux examens finaux (G3) 
+# car la fonction nuage de point nous permet ici de facilement montrer (ou non) la disparite entre les deux ecoles et surtout de faire ressortir les tendances statistiques 
+# sur la consommation d'alcool des eleves et peut etre d'etablir une influence sur les resultats finaux aux examens des eleves.
+# Le graphique se lit comme suit : les points en haut a droite sont ceux qui consomment le plus d'alcool a la fois en weekend et en semaine (ceux se rapprochant le plus du 5 sur l'abscisse et l'ordonnee).
+# A l'inverse, ceux etant le plus en bas a gauche (les plus proches de 1) sont ceux consommant le moins, voir pas d'alcool. En haut a gauche, se situent les personnes consommant exclusivement le weekend (1 a l'abcisse et 5 a l'ordonnee),
+# et ceux etant le plus en bas a droite sont ceux qui consomment de l'alcool exclusivement en semaine (5 a l'abscisse et 1 a l'ordonne).
+# Le premier resultat que l'on remarque est que la tendance a la consommation d'alcool est beaucoup plus importante durant le weekend que durant la semaine malgres quelques exceptions.
+# On peut expliquer cette tendance par le fait que la consommation d'alcool a l'adolescence et pour les jeunes adultes soient surtout liee a des moments sociabilites entre groupes de pair.
+# Les etudiants ayant cours en semaine, la plupart des activites sociales sont donc organisees en fin de semaine, en weekend et ces activites sont le moment propices a la consommation d'alcool en vue de sociabiliser (sorties en bars, boites, soiree chez quelqu'un).
+# Le deuxieme resultat que l'on peut noter est que les eleves de Gabirel Pereira (en rouge) sont plus nombreux a consommer de l'alcool que ceux de Mousinho da Silveira (en bleu).
+# Les eleves de GP sont aussi surtout beaucou plus representer dans des consommations intensives et notamment celles faites en semaines.
+# Difficile de dire si la difference est assez grande pour etre significative. Un debut d'analyse pour expliquer cette difference serait que Gabriel Pereira
+# est une ecole publique et donc que les eleves aient une plus grande liberte et moins d'attente au niveau du corps enseignant.
+# Le troisieme resultat est que l'on remarque que les resultats les plus bas (0, 5, 10) ont tendance a augmenter avec la consommation d'alcool
+# et surtout avec la consommation d'alcool en semaine. On ne peut pas affirmer que ce resultat soit significatif au vu de la presence de tres nombreux non-buveurs ou buveurs occasionnelle.
+# Cependant on peut imaginer une hypothese qui est que ceux qui consomment en semaine sont probablement victime d'addiction, d'alcoolisme
+# etant donne que l'addiction a l'alcool se caracterise par une consommation presque journaliere. On manque d'element pour approuver la validation d'une tel hypothese,
+# mais tout comment l'addiction a la marijuana a des consequences sur les notes, l'addiction a l'alcool pourrait entrainer des consequences sur les notes finales comme le montre le graphique.
+# Cependant, tout comme l'addiction a la marijuana, il faut voir si c'est l'addiction a l'alcool en elle meme qui cause la baisse des notes ou un environnement social particulierement precaire
+# qui causerait cette baisse des notes et cette addiction a la fois. C'est pour cela que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des eleves.
 
 
 #Analyse Juliette
