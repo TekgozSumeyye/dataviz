@@ -336,11 +336,12 @@ ggplot(fulldt) +
        title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") +
   theme_minimal()
+#JSP si pour vous ca marche, mais en tout cas ca ne marche pas pour moi, tu peux reverifier Juliette?
 
   labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
        title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
-
+#Pareil
        
 
 # Soutien scolaire et consommation d'alcool en semaine
@@ -373,7 +374,7 @@ ggplot(fulldt) +
                   fill = "Beneficie de soutien scolaire familial"
                 ) +
                 theme_minimal()
-              
+#Notes de sumeyye: tu peux pas additionner 2 varibles, tu peux avoir uniquement 1 variable dans x              
               
               # Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
               
@@ -389,10 +390,5 @@ ggplot(fulldt) +
                 ) +
                 theme_minimal()
               
-              # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale. 
-
-              
-              
-#Test Hugo
-              
-              
+              # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent a voir si marche de manière générale. 
+#cest normale que ca ne marche pas, tu peux pas avoir 2 variables dans x (sauf erreur de ma part) et la 2eme variable sappelle paid pas paidclass, je te l'aisse corriger sinon je vais le faire a ta place? 
