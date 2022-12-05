@@ -1,3 +1,8 @@
+#Chemin des bases de donnees
+path <- file.path("C:", "Users", "tekgo", "Documents", "GitHub", "dataviz", fsep="\\")
+setwd(path)
+#R version 4.1.3 (2022-03-10)
+
 #TELECHARGEMENT DES LIBRAIRIES
 library(readr)
 library(coefplot)
@@ -230,6 +235,11 @@ ggplot(fulldt) +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
+#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont supérieures ou inférieures aux limites définies par les moustaches. 
+#On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (médiant) que les meres aux foyers et "autres". 
+#Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
+#Par contre, l'icart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
+
 
 #Aurore
 ggplot(fulldt) +
