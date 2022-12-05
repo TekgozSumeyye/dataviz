@@ -222,6 +222,29 @@ ggplot(fulldt) +
     title = "Nuage de point consommation alcool en fonction G3 et Ã©cole"
   ) +
   theme_bw()
+
+# Ici on utilise le nuage de point pour montrer la différence entre école et l'influence de la consommation d'alcool sur les notes aux examens finaux (G3) 
+# car la fonction nuage de point nous permet ici de facilement montrer (ou non) la disparité entre les deux écoles et surtout de faire ressortir les tendances statistiques 
+# sur la consommation d'alcool des élèves et peut être d'établir une influence sur les résultats finaux aux examens des élèves.
+# Le graphique se lit comme suit : les points en haut à droite sont ceux qui consomment le plus d'alcool à la fois en weekend et en semaine (ceux se rapprochant le plus du 5 sur l'abscisse et l'ordonnée).
+# A l'inverse, ceux étant le plus en bas à gauche (les plus proches de 1) sont ceux consommant le moins, voir pas d'alcool. En haut à gauche, se situent les personnes consommant exclusivement le weekend (1 à l'abcisse et 5 à l'ordonnée),
+# et ceux étant le plus en bas à droite sont ceux qui consomment de l'alcool exclusivement en semaine (5 à l'abscisse et 1 à l'ordonnée).
+# Le premier résultat que l'on remarque est que la tendance à la consommation d'alcool est beaucoup plus importante durant le weekend que durant la semaine malgrès quelques exceptions.
+# On peut expliquer cette tendance par le fait que la consommation d'alcool à l'adolescence et pour les jeunes adultes soient surtout liée à des moments sociabilités entre groupes de pair.
+# Les étudiants ayant cours en semaine, la plupart des activités sociales sont donc organisées en fin de semaine, en weekend et ces activités sont le moment propices à la consommation d'alcool en vue de sociabiliser (sorties en bars, boites, soirée chez quelqu'un).
+# Le deuxième résultat que l'on peut noter est que les élèves de Gabirel Pereira (en rouge) sont plus nombreux à consommer de l'alcool que ceux de Mousinho da Silveira (en bleu).
+# Les élèves de GP sont aussi surtout beaucou plus représenter dans des consommations intensives et notamment celles faites en semaines.
+# Difficile de dire si la différence est assez grande pour être significative. Un début d'analyse pour expliquer cette différence serait que Gabriel Pereira
+# est une école publique et donc que les élèves aient une plus grande liberté et moins d'attente au niveau du corps enseignant.
+# Le troisième résultat est que l'on remarque que les résultats les plus bas (0, 5, 10) ont tendance à augmenter avec la consommation d'alcool
+# et surtout avec la consommation d'alcool en semaine. On ne peut pas affirmer que ce résultat soit significatif au vu de la présence de très nombreux non-buveurs ou buveurs occasionnelle.
+# Cependant on peut imaginer une hypothèse qui est que ceux qui consomment en semaine sont probablement victime d'addiction, d'alcoolisme
+# étant donné que l'addiction à l'alcool se caractèrise par une consommation presque journalière. On manque d'élément pour approuver la validation d'une tel hypothèse,
+# mais tout comment l'addiction à la marijuana a des conséquences sur les notes, l'addiction à l'alcool pourrait entrainer des conséquences sur les notes finales comme le montre le graphique.
+# Cependant, tout comme l'addiction à la marijuana, il faut voir si c'est l'addiction à l'alcool en elle même qui cause la baisse des notes ou un environnement social particulièrement précaire
+# qui causerait cette baisse des notes et cette addiction à la fois. C'est pour celà que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des élèves.
+
+
 #Analyse Juliette
 
 table(fulldt$G3)
@@ -432,4 +455,5 @@ ggplot(fulldt) +
               
               
 #Test Hugo
+              
               
