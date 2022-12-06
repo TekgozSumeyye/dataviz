@@ -397,9 +397,32 @@ ggplot(fulldt) +
 #Test Hugo
               #Structure Familiale
               
-              #Travail sur la qualité des relations familiales
+              #Travail sur la cohabitation des parents
+             
+              table(fulldt$Pstatus)
+              mode(fulldt$Pstatus) 
+              
               ggplot(fulldt)+
-                aes(x = Dalc,y= famrel, fill=Dalc)+
+                aes(x = Dalc,y = Pstatus, fill = Pstatus)+
+                scale_fill_hue(direction=1)+
+                geom_boxplot()+
+                labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
+                theme_bw()
+              
+              ggplot(fulldt)+
+                aes(x = Walc,y = Pstatus, fill = Pstatus)+
+                scale_fill_hue(direction=1)+
+                geom_boxplot()+
+                labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
+                theme_bw()
+              
+#Je ne sais pas si il y n'a aucune différence entre les élèves avec des parents séparés et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
+              
+              #Travail sur la qualité des relations familiales
+              table(fulldt$famrel)
+              
+              ggplot(fulldt)+
+                aes(x = Dalc, y = famrel, fill=famrel)+
                 scale_fill_hue(direction = 1)+
                 geom_boxplot()+
                 labs(x = "Consommation d alcool en semaine", y = "qualite des relations familiales", title="Lien entre conso d alcool en semaine et relation familiale")+
@@ -412,5 +435,23 @@ ggplot(fulldt) +
                 geom_jitter()+
                 labs(x="Consommation d alcool en semaine", y = "Consommation d alcool en weekend", title="Lien entre consommation d alcool et relation familiale")+
                 theme_bw()
-              #c est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
+              #C est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
+            
+# En observant et en se concentrant sur les extremes (les points les plus clairs et ceux les plus sombres)
+# on peut remarquer qu'il n'y pas une si grande disparite que ça et que la qualité des relations familiales est distribuee
+# de facon assez uniforme a travers tout le nuage de point. Les eleves ont en général une bonne relation avec leur famille et il y en a peu
+# avec une mauvaise ou tres mauvaise relation familiale (1, 2) et meme en se concentrant sur ceux la, ils se repartissent de facon assez
+# equitable meme si ils ont l air d etre un peu plus présent parmis ceux qui boivent plus frequemment.
               
+              #Travail sur le responsable legal de l eleve
+              
+              table(fulldt$guardian)
+              
+              ggplot(fulldt)+
+                aes(x = guardian, fill = guardian)+
+                geom_histogram()+
+                scale_fill_hue(direction = 1)+
+                labs(x = "responsable legal", title = "test")+
+                theme_bw()
+              #Je voulais juste voir la répartion du père ou de la mère mais la fonction table a suffit pour montrer 
+              #la difference de 25 - 75%
