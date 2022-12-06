@@ -162,7 +162,7 @@ ggplot(fulldt) +
   aes(x = Dalc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#En semaine, la consommation d'alcool est plutot mod?rer (tres peu de consommation)
+#En semaine, la consommation d'alcool est plutot moderer (tres peu de consommation)
 
 table(fulldt$Walc)
 
@@ -170,7 +170,7 @@ ggplot(fulldt) +
   aes(x = Walc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#Il y a beaucoup plus de consommation le weekend, ?tant donn? qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
+#Il y a beaucoup plus de consommation le weekend, etant donne qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
 
 #Impact alcool sur G3
 cor1 <- G3 ~ Walc + Dalc
@@ -189,7 +189,7 @@ coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
 #La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention ? leurs consommations d'alcool en semaine que en weekend.  
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
-#Analuse Aurore
+#Analyse Aurore
 #Les femmes ont une consommation plutot moderer que les hommes, on retrouve plus les H dans cat 5
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
@@ -255,7 +255,7 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Sexe", title = "Boxplot") +
   theme_bw()
 #Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
-#Les notes m?dians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
+#Les notes medians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
 #Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
 #Cela s'explique que les notes des filles sont similaire et que globalement les filles ont des notes eleves alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
@@ -294,6 +294,7 @@ ggplot(fulldt) +
   ) +
   theme_minimal()
 #Analyse Sumeyye
+#median tuteur-pere=12,5, median other et mere = identiques
 
 #b)Recherche plus poussee des raisons d'une consommation d'alcool ?excessive? :
 #...
