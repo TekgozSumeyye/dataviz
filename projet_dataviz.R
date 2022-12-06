@@ -162,7 +162,7 @@ ggplot(fulldt) +
   aes(x = Dalc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#En semaine, la consommation d'alcool est plutot modérer (tres peu de consommation)
+#En semaine, la consommation d'alcool est plutot mod?rer (tres peu de consommation)
 
 table(fulldt$Walc)
 
@@ -170,7 +170,7 @@ ggplot(fulldt) +
   aes(x = Walc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#Il y a beaucoup plus de consommation le weekend, étant donné qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
+#Il y a beaucoup plus de consommation le weekend, ?tant donn? qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
 
 #Impact alcool sur G3
 cor1 <- G3 ~ Walc + Dalc
@@ -178,15 +178,15 @@ lm1<-lm(cor1 , data = fulldt)
 coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
 #La consommation d'alcool en semaine a plus d'impact negatif sur les resultats scolaires G3 que la consommation le weekend. 
 #Les deux coefficient est negative, mais l'intervalle de confiance de Walc couvre 0, donc le coefficient de Walc n'est pas significatif. 
-#Cela peut etre du au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux revisions donc leurs notes sont impactés. 
+#Cela peut etre du au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux revisions donc leurs notes sont impact?s. 
 #Dalc= -0.39 et walc -0.17
 
 cor2 <- age ~ Walc + Dalc
 lm2<-lm(cor2 , data = fulldt)
 coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
-#Ici, nous chercons à comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
+#Ici, nous chercons ? comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
 #Les deux coefficient sont positive, mais etant donne que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a dalc. 
-#La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention à leurs consommations d'alcool en semaine que en weekend.  
+#La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention ? leurs consommations d'alcool en semaine que en weekend.  
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
 #Analuse Aurore
@@ -255,7 +255,7 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Sexe", title = "Boxplot") +
   theme_bw()
 #Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
-#Les notes médians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
+#Les notes m?dians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
 #Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
 #Cela s'explique que les notes des filles sont similaire et que globalement les filles ont des notes eleves alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
@@ -265,8 +265,8 @@ ggplot(fulldt) +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
-#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont supérieures ou inférieures aux limites définies par les moustaches. 
-#On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (médiant) que les meres aux foyers et "autres". 
+#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
+#On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (m?diant) que les meres aux foyers et "autres". 
 #Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
 #Par contre, l'icart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
 
@@ -295,7 +295,7 @@ ggplot(fulldt) +
   theme_minimal()
 #Analyse Sumeyye
 
-#b)Recherche plus poussee des raisons d'une consommation d'alcool «excessive» :
+#b)Recherche plus poussee des raisons d'une consommation d'alcool ?excessive? :
 #...
 
 
@@ -392,3 +392,24 @@ ggplot(fulldt) +
               
               # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent a voir si marche de maniÃ¨re gÃ©nÃ©rale. 
 #cest normale que ca ne marche pas, tu peux pas avoir 2 variables dans x (sauf erreur de ma part) et la 2eme variable sappelle paid pas paidclass, je te l'aisse corriger sinon je vais le faire a ta place? 
+              
+#Test Hugo
+              #Structure Familiale
+              
+              #Travail sur la qualitÃ© des relations familiales
+              ggplot(fulldt)+
+                aes(x = Dalc,y= famrel, fill=Dalc)+
+                scale_fill_hue(direction = 1)+
+                geom_boxplot()+
+                labs(x = "Consommation d alcool en semaine", y = "qualite des relations familiales", title="Lien entre conso d alcool en semaine et relation familiale")+
+                theme_bw()
+              # Ca marche pas et je comprends pas pourquoi, j ai peut etre mal choisi la mauvaise fonction pour montrer ce que je veux montrer
+              
+              ggplot(fulldt)+
+                aes(x=Dalc, y=Walc, colour=famrel)+
+                scale_fill_continuous()+
+                geom_jitter()+
+                labs(x="Consommation d alcool en semaine", y = "Consommation d alcool en weekend", title="Lien entre consommation d alcool et relation familiale")+
+                theme_bw()
+              #c est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
+              
