@@ -541,37 +541,7 @@ ggplot(fulldt) +
 ##=> Les eleves qui declarent consommer peu d'alcool en semaine, sont plus nombreux a beneficier de soutien scolaire
        
        
-        # Essaie de calcul des variables famsup et paidclass. 
-              
-              # Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
-              
-              gglot(fulldt) +
-                aes(x = Dalc + Walk, fill = famsup) +
-                geom_histogram(bins = 30L) +
-                scale_fill_hue(direction = 1) +
-                labs (   
-                  x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-                  y = "Nombres d'eleves"
-                  title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-                  fill = "Beneficie de soutien scolaire familial"
-                ) +
-                theme_minimal()
-#Notes de sumeyye: tu peux pas additionner 2 varibles, tu peux avoir uniquement 1 variable dans x              
-              
-              # Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
-              
-              gglot(fulldt) +
-                aes(x = Dalc + Walk, fill = paidclass) +
-                geom_histogram(bins = 30L) +
-                scale_fill_hue(direction = 1) +
-                labs (   
-                  x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-                  y = "Nombres d'eleves"
-                  title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-                  fill = "Beneficie de soutien scolaire familial"
-                ) +
-                theme_minimal()
-              
+
               # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent a voir si marche de manière générale. 
 #cest normale que ca ne marche pas, tu peux pas avoir 2 variables dans x (sauf erreur de ma part) et la 2eme variable sappelle paid pas paidclass, je te l'aisse corriger sinon je vais le faire a ta place? 
               
