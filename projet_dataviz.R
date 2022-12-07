@@ -462,18 +462,20 @@ ggplot(fulldt) +
               
               ggplot(fulldt) +
                 
-                aes(x = dalk, y = Medu, fill = Medu) +
+                aes(x = Dalc, y = Medu, fill = Medu) +
                 geom_boxplot(fill = "#BDD3E8") +
                 scale_fill_brewer(palette = "OrRd", direction = 1) +
                 labs(x = "Conso alc semaine", y = "etudes mere", title = "Boxplot") +
                 theme_bw()
               
               ggplot(fulldt) +
-                aes(x = dalk, y = Fedu, fill = Fedu) +
+                aes(x = Dalc, y = Fedu, fill = Fedu) +
                 geom_boxplot(fill = "#BDD3E8") +
                 scale_fill_brewer(palette = "OrRd", direction = 1) +
                 labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
                 theme_bw()
+              
+              
               
 =======
               #la difference de 25 - 75%
