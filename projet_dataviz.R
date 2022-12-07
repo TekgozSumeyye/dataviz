@@ -195,7 +195,7 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_j
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
 #Analyse Doriane
-
+#
 
 
 #Consommation d'alcool selon job mere
