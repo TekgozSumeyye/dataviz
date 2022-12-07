@@ -1,6 +1,9 @@
 #Chemin des bases de donnees
 path <- file.path("C:", "Users", "tekgo", "Documents", "GitHub", "dataviz", fsep="\\")
 setwd(path)
+
+setwd("C:/Users/Aurore/OneDrive/Bureau/M2 ASC/Premier Semestre/Outil et logiciel d'analyse/Outils et analyse de données")
+
 #R version 4.1.3 (2022-03-10)
 
 #TELECHARGEMENT DES LIBRAIRIES
@@ -194,22 +197,6 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_j
 #Les femmes ont une consommation plutot moderer que les hommes, on retrouve plus les H dans cat 5
 
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
-#Analyse Doriane
-#
-
-
-#Consommation d'alcool selon job mere
-ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = Mjob, size = Mjob) +
-  geom_jitter() +
-  scale_color_viridis_d(option = "plasma", direction = 1) +
-  labs(
-    x = "Consommation alcool semaine",
-    y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction du job de la mere"
-  ) +
-  theme_bw()
-
 
 # Analyse de la consommation d’alcool durant le travail en semaine (Dalc) et la consommation d’alcool durant le week-end
 # (Walc) selon le genre : Valeurs numérique : 1 – Equivaut a tres faible et 5 – equivaut à tres elevee. 
@@ -229,6 +216,9 @@ ggplot(fulldt) +
 #Les femmes consommerai plus d’alcool durant le week-end (entre le 2 et le 3) qu’en semaine (majorité en 1). 
 
 
+
+
+
 #Faire boxplot pour etudes pere et mere 
 
 
@@ -241,6 +231,7 @@ ggplot(fulldt) +
 #On peut conclure alors que la profession de la mère à une influence sur les résultats scolaire de l’éleve. 
 #Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
 #(par exemple le fait d’être enseignant est plus susceptible d’aider).
+
 
 #b)Recherche plus poussée des raisons d'une consommation d'alcool «excessive» :
 
@@ -256,6 +247,60 @@ gglot(fulldt) +
     fill = "Beneficie de soutien scolaire"
   ) +
   theme_minimal()
+
+# Essaie de calcul des variables famsup et paidclass. 
+
+# Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
+
+gglot(fulldt) +
+  aes(x = Dalc + Walk, fill = famsup) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
+    y = "Nombres d'eleves"
+    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
+
+
+# Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
+
+gglot(fulldt) +
+  aes(x = Dalc + Walk, fill = paidclass) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
+    y = "Nombres d'eleves"
+    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
+
+# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale.
+
+
+
+#Analyse Doriane
+#
+
+
+#Consommation d'alcool selon job mere
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = Mjob, size = Mjob) +
+  geom_jitter() +
+  scale_color_viridis_d(option = "plasma", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction du job de la mere"
+  ) +
+  theme_bw()
+
+
+
 
 #Analyse Hugo
 
@@ -321,6 +366,53 @@ ggplot(fulldt) +
 
 
 #Aurore
+
+# Essaie de calcul des variables famsup et paidclass. 
+
+# Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
+
+gglot(fulldt) +
+  aes(x = Dalc + Walk, fill = famsup) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
+    y = "Nombres d'eleves"
+    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
+
+
+# Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
+
+gglot(fulldt) +
+  aes(x = Dalc + Walk, fill = paidclass) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
+    y = "Nombres d'eleves"
+    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
+
+# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
   geom_boxplot() +
@@ -350,6 +442,7 @@ ggplot(fulldt) +
     title = "Boxplot impact tuteur eleve sur G3"
   ) +
   theme_minimal()
+
 
 # Analyse de la consommation d’alcool durant le travail en semaine (Dalc) et la consommation d’alcool durant le week-end
 # (Walc) selon le genre : Valeurs numérique : 1 – Equivaut a tres faible et 5 – equivaut à tres elevee. 
