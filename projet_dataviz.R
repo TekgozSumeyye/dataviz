@@ -476,7 +476,4 @@ ggplot(fulldt) +
                 theme_bw()
               
               
-              
-=======
-              #la difference de 25 - 75%
->>>>>>> 7bf3d06fead95d7691cd6fc3b8b368539dab72fb
+                            #la difference de 25 - 75%
