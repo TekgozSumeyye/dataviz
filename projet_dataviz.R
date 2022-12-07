@@ -418,9 +418,9 @@ ggplot(fulldt) +
  fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
 
 
-  aes(x = Walc, fill = address) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
+ aes(x = Walc, fill = address) +
+   geom_histogram(bins = 30L) +
+   scale_fill_hue(direction = 1) +
   labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
        title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
        fill = "Cadre de vie (R = rural, U = Urbain)") +
