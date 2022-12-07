@@ -257,7 +257,7 @@ ggplot(fulldt) +
 #Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
 #Les notes medians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
 #Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
-#Cela s'explique que les notes des filles sont similaire et que globalement les filles ont des notes eleves alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
+#Cela s'explique que les notes des filles sont similaires et que globalement les filles ont des notes elevees alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
@@ -293,45 +293,6 @@ ggplot(fulldt) +
     title = "Boxplot impact tuteur eleve sur G3"
   ) +
   theme_minimal()
-
-ggplot(fulldt) +
-  aes(x = G3, y = Fjob, fill = Fjob) +
-  geom_boxplot() +
-  scale_fill_brewer(palette = "OrRd", direction = 1) +
-  labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
-  theme_bw()
-
-# Analyse de la consommation d’alcool durant le travail en semaine (Dalc) et la consommation d’alcool durant le week-end
-# (Walc) selon le genre : Valeurs numérique : 1 – Equivaut a tres faible et 5 – equivaut à tres elevee. 
-#A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine 
-#(Dalc) et en week-end (Walc)  c’est qu’il y a peu de consommation d’alcool que ce soit pour les homme ou pour les femmes,
-#les points étant principalement concentrer entre le nombre 1 et 1,5. 
-#Les femmes à part quelques occurrences (certain point compris au-delà de 5), boivent moins que les hommes qui sont
-#plus nombreux à boire durant le travail en semaine (une importante répartition de points entre le 4 et le 5). 
-
-#Pour la consommation d’alcool durant le week-end (Walc), il y a également peu de consommation 
-#(majorité étant compris dans le 1) que ce soit pour les hommes ou pour les femmes . Il y a plus de consommation de la part
-#des hommes durant le week end les points bleu étant compris entre le 4 et le 5. Il y a une augmentation de la consommation d’alcool pour les hommes le week-end (points bleu compris entre le 4 et le 5). 
-
-#Selon notre nuages de points les hommes consomme plus d’alcool le week-end (la majorité étant 
-#comprises dans le 4) que la semaine (la majorité étant comprises entre le 3 et 4). 
-
-#Les femmes consommerai plus d’alcool durant le week-end (entre le 2 et le 3) qu’en semaine (majorité en 1). 
-
-
-#Faire boxplot pour etudes pere et mere 
-
-
-# Analyse des notes (compris entre 0 et 20) selon la profession de la mère (Mjob) compris entre les catégories : teacher, services, other, healt et at home.
-
-#On observe selon le boxplot que les élèves ayant une mère qui est soit enseignante, soit dans la santé ou à la maison ont leur notes minimums comprise entre 5 et 7. 
-#La majorité des éléves ont des notes tournant autour de la moyenne (la majorité des premier quartiles dépassant la note 10), ceux qui ont les notes les plus éléves sont ceux dont leur mères est enseignante (médiane supérieure aux autres ainsi que le troisième quartile). Les élèves qui ont leur mères qui est « autres » (other) ont leur notes minimum qui est plus large (4,5 environ), sûrement liées au fait que cette catégorie est très large (beaucoup de qualificatif large à l’intérieur). 
-#Les éléves ayant une mère enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dépassant les 15).
-#Ceux qui ont une mère à la maison  (at_home) en majorité ont des notes comprise entre 10 et 14 (la médiane etant environ à 11).
-#On peut conclure alors que la profession de la mère à une influence sur les résultats scolaire de l’éleve. 
-#Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
-#(par exemple le fait d’être enseignant est plus susceptible d’aider).
-
 #Analyse Sumeyye
 #median tuteur-pere=12,5, median other et mere = identiques
 
@@ -493,6 +454,7 @@ ggplot(fulldt) +
                 labs(x = "responsable legal", title = "test")+
                 theme_bw()
               #Je voulais juste voir la répartion du père ou de la mère mais la fonction table a suffit pour montrer 
+<<<<<<< HEAD
               #la difference de 25 - 75%
 
               # La consommation d'alcool le week-end selon l'origine sociale 
@@ -513,3 +475,6 @@ ggplot(fulldt) +
                 labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
                 theme_bw()
               
+=======
+              #la difference de 25 - 75%
+>>>>>>> 7bf3d06fead95d7691cd6fc3b8b368539dab72fb
