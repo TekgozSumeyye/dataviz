@@ -494,3 +494,22 @@ ggplot(fulldt) +
                 theme_bw()
               #Je voulais juste voir la répartion du père ou de la mère mais la fonction table a suffit pour montrer 
               #la difference de 25 - 75%
+
+              # La consommation d'alcool le week-end selon l'origine sociale 
+              
+              
+              ggplot(fulldt) +
+                
+                aes(x = dalk, y = Medu, fill = Medu) +
+                geom_boxplot(fill = "#BDD3E8") +
+                scale_fill_brewer(palette = "OrRd", direction = 1) +
+                labs(x = "Conso alc semaine", y = "etudes mere", title = "Boxplot") +
+                theme_bw()
+              
+              ggplot(fulldt) +
+                aes(x = dalk, y = Fedu, fill = Fedu) +
+                geom_boxplot(fill = "#BDD3E8") +
+                scale_fill_brewer(palette = "OrRd", direction = 1) +
+                labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
+                theme_bw()
+              
