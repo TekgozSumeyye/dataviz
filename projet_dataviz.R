@@ -242,6 +242,21 @@ ggplot(fulldt) +
 #Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
 #(par exemple le fait d’être enseignant est plus susceptible d’aider).
 
+#b)Recherche plus poussée des raisons d'une consommation d'alcool «excessive» :
+
+# Consomation "excessive" d'alcool selon le soutien scolaire : variable schoolsup :
+gglot(fulldt) +
+  aes(x = Dalc + Walk, fill = schoolsup ) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
+    y = "Nombres d'eleves"
+    title = "Le soutien scolaire et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire"
+  ) +
+  theme_minimal()
+
 #Analyse Hugo
 
 #Notes G3
