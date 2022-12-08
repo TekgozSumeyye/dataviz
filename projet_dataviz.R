@@ -125,7 +125,7 @@ as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
            stat = 'identity') +
-  scale_fill_manual(values=palette) +
+  scale_fill_manual(values=c("#ff8000", "#FF0000", "#1884F7", "#23BB66", "#1EC7DE")) +
   ggtitle("Distribution de metier du pere") +
   xlab("Job du pere") +
   ylab("Effectifs") +
@@ -140,7 +140,7 @@ as.data.frame(table(fulldt$Mjob))
 ggplot(as.data.frame(table(fulldt$Mjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
            stat = 'identity') +
-  scale_fill_manual(values=palette) +
+  scale_fill_manual(values=c("#ff8000", "#FF0000", "#1884F7", "#23BB66", "#1EC7DE")) +
   ggtitle("Distribution du metier de la mere") +
   xlab("Job de la mere") +
   ylab("Effectifs") +
