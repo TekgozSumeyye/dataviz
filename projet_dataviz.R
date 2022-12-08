@@ -166,7 +166,7 @@ ggplot(fulldt) +
   aes(x = Dalc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#En semaine, la consommation d'alcool est plutot moderer (tres peu de consommation)
+#En semaine, la consommation d'alcool est plutot moderer (tres faible consommation)
 
 table(fulldt$Walc)
 
@@ -174,7 +174,7 @@ ggplot(fulldt) +
   aes(x = Walc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#Il y a beaucoup plus de consommation le weekend, etant donne qu'il n'y a pas cours, plus de personnes consomment excessifement de l'alcool. 
+#Il y a beaucoup plus de consommation le weekend, etant donne qu'il n'y a pas cours, plus de personnes consomment excessivement de l'alcool. 
 
 #Impact alcool sur G3
 cor1 <- G3 ~ Walc + Dalc
