@@ -50,7 +50,7 @@ str(fulldt)
 ggplot(as.data.frame(table(fulldt$school))) +
      geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
                            stat = 'identity') +
-     scale_fill_manual(values=palette) +
+     scale_fill_manual(values=c("#56B4E9", "#E69F00")) +
      ggtitle("Repartition de l'ecole") +
      xlab("Ecole") +
      ylab("Effectifs") +
