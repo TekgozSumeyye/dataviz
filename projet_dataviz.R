@@ -188,7 +188,7 @@ coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
 cor2 <- age ~ Walc + Dalc
 lm2<-lm(cor2 , data = fulldt)
 coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
-#Ici, nous chercons ? comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
+#Ici, nous cherchons a comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
 #Les deux coefficient sont positive, mais etant donne que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a dalc. 
 #La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention ? leurs consommations d'alcool en semaine que en weekend.  
 
