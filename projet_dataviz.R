@@ -278,7 +278,7 @@ gglot(fulldt) +
     fill = "Beneficie de soutien scolaire familial"
   ) +
   theme_minimal()
-
+# Après visualisation des résultats nous concluons qu'ils ne sont pas pertinent pour notre analyse car sont trop proche et ne sont pas signifiant.
 # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale.
 
 
@@ -398,7 +398,10 @@ gglot(fulldt) +
   ) +
   theme_minimal()
 
-# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale. 
+# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale.
+# Nous n'allons pas garder ces calculs car les résultats ne sont pas vraiment significatif ou intéressant dans ce que nous cherchons 
+# a voir cela était alors des essais non concluant. 
+
 
 
 
