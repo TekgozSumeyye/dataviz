@@ -148,9 +148,10 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Ici aussi, other se demarque des autres, suivi de services
-#Contrairement aux meres, les peres travaillent beaucoup plus dans des metiers de categories "autres" ou services, alors qu'il y a une part importante de mere travaillant dans leducation, sante ou des meres aux foyers.
-
+#Ici aussi, la catégorie "autres" se démarque des autres, suivi de services.
+#Contrairement aux mères, les pères travaillent beaucoup plus dans des métiers
+#de catégories "autres" ou services, alors qu'il y a une part importante de mère
+#travaillant dans éducation, santé ou des mères aux foyers.
 
 
 #### III. Visualision des donnees afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
