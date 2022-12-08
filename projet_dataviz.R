@@ -241,8 +241,8 @@ gglot(fulldt) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-    y = "Nombres d'eleves"
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
+    y = "Nombres d'eleves" ,
     title = "Le soutien scolaire et la consomation excessive d'alcool",
     fill = "Beneficie de soutien scolaire"
   ) +
@@ -257,8 +257,8 @@ gglot(fulldt) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-    y = "Nombres d'eleves"
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
+    y = "Nombres d'eleves" ,
     title = "Le soutien scolaire familial et la consomation excessive d'alcool",
     fill = "Beneficie de soutien scolaire familial"
   ) +
@@ -272,8 +272,8 @@ gglot(fulldt) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-    y = "Nombres d'eleves"
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
+    y = "Nombres d'eleves" ,
     title = "Le soutien scolaire familial et la consomation excessive d'alcool",
     fill = "Beneficie de soutien scolaire familial"
   ) +
@@ -346,7 +346,7 @@ table(fulldt$G3)
 ggplot(fulldt) +
   aes(x = G3, y = sex) +
   geom_boxplot(fill = "#BDD3E8") +
-  labs(x = "Notes G3", y = "Sexe", title = "Boxplot") +
+  labs(x = "Notes G3", y = "Sexe", title = "Boites ‡ moustaches du sexe sur les notes G3") +
   theme_bw()
 #Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
 #Les notes medians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
@@ -357,9 +357,9 @@ ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
-  labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
+  labs(x = "Notes G3", y = "Job mere", title = "Boites ‡ moustaches du job de la mere sur les notes G3 ") +
   theme_bw()
-#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
+‡Á#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
 #On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (m?diant) que les meres aux foyers et "autres". 
 #Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
 #Par contre, l'icart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
@@ -370,14 +370,14 @@ ggplot(fulldt) +
 # Essaie de calcul des variables famsup et paidclass. 
 
 # Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
-
+#ne marche pas
 gglot(fulldt) +
   aes(x = Dalc + Walk, fill = famsup) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-    y = "Nombres d'eleves"
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
+    y = "Nombres d'eleves" , 
     title = "Le soutien scolaire familial et la consomation excessive d'alcool",
     fill = "Beneficie de soutien scolaire familial"
   ) +
@@ -385,14 +385,14 @@ gglot(fulldt) +
 
 
 # Consomation d'alcool excessive selon les cours suppl√©mentaire payant : varable paidclass :
-
+#ne marche pas
 gglot(fulldt) +
   aes(x = Dalc + Walk, fill = paidclass) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive"
-    y = "Nombres d'eleves"
+    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive",
+    y = "Nombres d'eleves" , 
     title = "Le soutien scolaire familial et la consomation excessive d'alcool",
     fill = "Beneficie de soutien scolaire familial"
   ) +
@@ -608,7 +608,7 @@ ggplot(fulldt) +
                 labs(x = "responsable legal", title = "test")+
                 theme_bw()
               #Je voulais juste voir la r√©partion du p√®re ou de la m√®re mais la fonction table a suffit pour montrer 
-<<<<<<< HEAD
+
               #la difference de 25 - 75%
 
               # La consommation d'alcool le week-end selon l'origine sociale 
