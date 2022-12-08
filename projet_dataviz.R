@@ -201,7 +201,7 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom
 # Analyse de la consommation d’alcool durant le travail en semaine (Dalc) et la consommation d’alcool durant le week-end
 # (Walc) selon le genre : Valeurs numérique : 1 – Equivaut a tres faible et 5 – equivaut à tres elevee. 
 #A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine 
-#(Dalc) et en week-end (Walc)  c’est qu’il y a peu de consommation d’alcool que ce soit pour les homme ou pour les femmes,
+#(Dalc) et en week-end (Walc)  c'est qu'il y a peu de consommation d’alcool que ce soit pour les homme ou pour les femmes,
 #les points étant principalement concentrer entre le nombre 1 et 1,5. 
 #Les femmes à part quelques occurrences (certain point compris au-delà de 5), boivent moins que les hommes qui sont
 #plus nombreux à boire durant le travail en semaine (une importante répartition de points entre le 4 et le 5). 
