@@ -192,17 +192,11 @@ coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
 #Les deux coefficient sont positive, mais etant donne que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a dalc. 
 #La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention ? leurs consommations d'alcool en semaine que en weekend.  
 
-ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex, size = freetime))+   geom_jitter(position=position_jitter(0.2))
-#Analyse Aurore
-
-#Les femmes ont une consommation plutot moderer que les hommes, on retrouve plus les H dans cat 5
-
-ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom_jitter(position=position_jitter(0.2))
-
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex))+   geom_jitter(position=position_jitter(0.2))
 # Analyse de la consommation d’alcool durant le travail en semaine (Dalc) et la consommation d’alcool durant le week-end
 # (Walc) selon le genre : Valeurs numérique : 1 – Equivaut a tres faible et 5 – equivaut à tres elevee. 
 #A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine 
-#(Dalc) et en week-end (Walc)  c'est qu'il y a peu de consommation d’alcool que ce soit pour les homme ou pour les femmes,
+#(Dalc) et en week-end (Walc)  c'est qu'il y a peu de consommation excesive d’alcool que ce soit pour les homme ou pour les femmes,
 #les points étant principalement concentrer entre le nombre 1 et 1,5. 
 #Les femmes à part quelques occurrences (certain point compris au-delà de 5), boivent moins que les hommes qui sont
 #plus nombreux à boire durant le travail en semaine (une importante répartition de points entre le 4 et le 5). 
@@ -215,29 +209,29 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = address, size = freetime))+ geom
 #comprises dans le 4) que la semaine (la majorité étant comprises entre le 3 et 4). 
 
 #Les femmes consommerai plus d’alcool durant le week-end (entre le 2 et le 3) qu’en semaine (majorité en 1). 
+#SUMEYYE ANALYSE
+ggplot(fulldt) +
+  aes(x = Dalc, y = G3, colour = Dalc) +
+  geom_jitter(size = 1.5) +
+  scale_color_viridis_c(option = "viridis", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Notes G3",
+    title = "Conso alcool semaine notes"
+  ) +
+  theme_minimal()
+
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=position_jitter(0.2))
+#MANQUE ANALYSE?
 
 
 
-
-
-#Faire boxplot pour etudes pere et mere 
-
-
-# Analyse des notes (compris entre 0 et 20) selon la profession de la mère (Mjob) compris entre les catégories : teacher, services, other, healt et at home.
-
-#On observe selon le boxplot que les élèves ayant une mère qui est soit enseignante, soit dans la santé ou à la maison ont leur notes minimums comprise entre 5 et 7. 
-#La majorité des éléves ont des notes tournant autour de la moyenne (la majorité des premier quartiles dépassant la note 10), ceux qui ont les notes les plus éléves sont ceux dont leur mères est enseignante (médiane supérieure aux autres ainsi que le troisième quartile). Les élèves qui ont leur mères qui est « autres » (other) ont leur notes minimum qui est plus large (4,5 environ), sûrement liées au fait que cette catégorie est très large (beaucoup de qualificatif large à l’intérieur). 
-#Les éléves ayant une mère enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dépassant les 15).
-#Ceux qui ont une mère à la maison  (at_home) en majorité ont des notes comprise entre 10 et 14 (la médiane etant environ à 11).
-#On peut conclure alors que la profession de la mère à une influence sur les résultats scolaire de l’éleve. 
-#Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
-#(par exemple le fait d’être enseignant est plus susceptible d’aider).
 
 
 #b)Recherche plus poussée des raisons d'une consommation d'alcool «excessive» :
 
 # Consomation "excessive" d'alcool selon le soutien scolaire : variable schoolsup :
-gglot(fulldt) +
+ggplot(fulldt) +
   aes(x = Dalc + Walk, fill = schoolsup ) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
@@ -249,11 +243,10 @@ gglot(fulldt) +
   ) +
   theme_minimal()
 
-# Essaie de calcul des variables famsup et paidclass. 
 
 # Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
 
-gglot(fulldt) +
+ggplot(fulldt) +
   aes(x = Dalc + Walk, fill = famsup) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
@@ -268,7 +261,7 @@ gglot(fulldt) +
 
 # Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
 
-gglot(fulldt) +
+ggplot(fulldt) +
   aes(x = Dalc + Walk, fill = paidclass) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
@@ -280,12 +273,9 @@ gglot(fulldt) +
   ) +
   theme_minimal()
 # Après visualisation des résultats nous concluons qu'ils ne sont pas pertinent pour notre analyse car sont trop proche et ne sont pas signifiant.
-# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale.
 
 
 
-#Analyse Doriane
-#
 
 
 #Consommation d'alcool selon job mere
@@ -307,7 +297,7 @@ ggplot(fulldt) +
 
 #Notes G3
 ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = school, size = G3) +
+  aes(x = Dalc, y = Walc, colour = , size = G3) +
   geom_jitter() +
   scale_color_hue(direction = 1) +
   labs(
@@ -354,68 +344,26 @@ ggplot(fulldt) +
 #Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
 #Cela s'explique que les notes des filles sont similaires et que globalement les filles ont des notes elevees alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
+
+#BOXPLOT FJOB, MJOB, FEDU, MEDU:
+
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boites � moustaches du job de la mere sur les notes G3 ") +
   theme_bw()
-��#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
-#On remarque que les eleves de mere travaillant dans la sante ou les eleves de meres professeurs ont des meilleurs notes (m?diant) que les meres aux foyers et "autres". 
+#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
+#On observe selon le boxplot que les eleves ayant une mere qui est soit enseignante, soit dans la sante ou a la maison ont leur notes minimums comprise entre 5 et 7. 
+#ceux qui ont les notes les plus eleves sont ceux dont leur meres est enseignante (mediane superieure aux autres ainsi que le troisieme quartile). Les eleves qui ont leur mères qui est "autre" (other) 
+#ont leur notes minimum qui est plus large (4,5 environ), sûrement liées au fait que cette categorie est tres large (beaucoup de qualificatif large a linterieur). 
+#Les eleves ayant une mere enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dépassant les 15).
+#Ceux qui ont une mere a la maison  (at_home) en majorite ont des notes comprise entre 10 et 14 (la médiane etant environ a 11).
+#On peut conclure alors que la profession de la mere a une influence sur les resultats scolaire de leleve. 
+#Cela peut sexpliquer notamment par le temps disponible liees a la profession mais aussi les aides qui peuvent etre apporter
+#(par exemple le fait dautre enseignant est plus susceptible daider).
 #Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
-#Par contre, l'icart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
-
-
-#Aurore
-
-# Essaie de calcul des variables famsup et paidclass. 
-
-# Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
-#ne marche pas
-gglot(fulldt) +
-  aes(x = Dalc + Walk, fill = famsup) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
-    y = "Nombres d'eleves" , 
-    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
-
-
-# Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
-#ne marche pas
-gglot(fulldt) +
-  aes(x = Dalc + Walk, fill = paidclass) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive",
-    y = "Nombres d'eleves" , 
-    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
-
-# Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent à voir si marche de manière générale.
-# Nous n'allons pas garder ces calculs car les résultats ne sont pas vraiment significatif ou intéressant dans ce que nous cherchons 
-# a voir cela était alors des essais non concluant. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#Par contre, l'ecart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
 
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
@@ -424,18 +372,39 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
 
-# Analyse des notes (compris entre 0 et 20) selon la profession de la mère (Mjob) compris entre les catégories : teacher, services, other, healt et at home.
 
-#On observe selon le boxplot que les élèves ayant une mère qui est soit enseignante, soit dans la santé ou à la maison ont leur notes minimums comprise entre 5 et 7. 
-#La majorité des éléves ont des notes tournant autour de la moyenne (la majorité des premier quartiles dépassant la note 10), ceux qui ont les notes les plus éléves sont ceux dont leur mères est enseignante (médiane supérieure aux autres ainsi que le troisième quartile). Les élèves qui ont leur mères qui est « autres » (other) ont leur notes minimum qui est plus large (4,5 environ), sûrement liées au fait que cette catégorie est très large (beaucoup de qualificatif large à l’intérieur). 
-#Les éléves ayant une mère enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dépassant les 15).
-#Ceux qui ont une mère à la maison  (at_home) en majorité ont des notes comprise entre 10 et 14 (la médiane etant environ à 11).
-#On peut conclure alors que la profession de la mère à une influence sur les résultats scolaire de l’éleve. 
-#Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
-#(par exemple le fait d’être enseignant est plus susceptible d’aider).
 
-#Faire boxplot pour etudes pere et mere 
+# Consomation d'alcool excessive en semaine selon le soutien scolaire familial : variable famsup :
+ggplot(fulldt) +
+  aes(x = Dalc, fill = famsup) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine" ,
+    y = "Nombres d'eleves" , 
+    title = "Le soutien scolaire familial et la consomation d'alcool en semaine",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
 
+
+# Consomation d'alcool excessive selon les cours supplémentaire payant : varable paidclass :
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = paid) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine",
+    y = "Nombres d'eleves" , 
+    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  theme_minimal()
+#Les eleves qui declarent consommer peu d'alcool en semaine, sont plus nombreux a beneficier de soutien scolaire
+     
+
+#FAIRE ANALYSE TUTEUR SUR G3
 ggplot(fulldt) +
   aes(x = G3, y = guardian, fill = guardian) +
   geom_boxplot() +
@@ -466,20 +435,7 @@ ggplot(fulldt) +
 #Les femmes consommerai plus d’alcool durant le week-end (entre le 2 et le 3) qu’en semaine (majorité en 1). 
 
 
-#Faire boxplot pour etudes pere et mere 
 
-
-# Analyse des notes (compris entre 0 et 20) selon la profession de la mère (Mjob) compris entre les catégories : teacher, services, other, healt et at home.
-
-#On observe selon le boxplot que les élèves ayant une mère qui est soit enseignante, soit dans la santé ou à la maison ont leur notes minimums comprise entre 5 et 7. 
-#La majorité des éléves ont des notes tournant autour de la moyenne (la majorité des premier quartiles dépassant la note 10), ceux qui ont les notes les plus éléves sont ceux dont leur mères est enseignante (médiane supérieure aux autres ainsi que le troisième quartile). Les élèves qui ont leur mères qui est « autres » (other) ont leur notes minimum qui est plus large (4,5 environ), sûrement liées au fait que cette catégorie est très large (beaucoup de qualificatif large à l’intérieur). 
-#Les éléves ayant une mère enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dépassant les 15).
-#Ceux qui ont une mère à la maison  (at_home) en majorité ont des notes comprise entre 10 et 14 (la médiane etant environ à 11).
-#On peut conclure alors que la profession de la mère à une influence sur les résultats scolaire de l’éleve. 
-#Cela peut s’expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
-#(par exemple le fait d’être enseignant est plus susceptible d’aider).
-#Analyse Sumeyye
-#median tuteur-pere=12,5, median other et mere = identiques
 
 #b)Recherche plus poussee des raisons d'une consommation d'alcool ?excessive? :
 #...
@@ -510,125 +466,85 @@ ggplot(fulldt) +
  fill = "Cadre de vie (R = rural, U = Urbain)") +
  theme_minimal()
 
- labs(x = "Consommation d'alcool pendant le week-end ", y = "Eleves declarant boire le week-end", 
- title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
- fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
 
-
- aes(x = Walc, fill = address) +
-   geom_histogram(bins = 30L) +
-   scale_fill_hue(direction = 1) +
-  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
-       title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
-       fill = "Cadre de vie (R = rural, U = Urbain)") +
-  theme_minimal()
-#JSP si pour vous ca marche, mais en tout cas ca ne marche pas pour moi, tu peux reverifier Juliette?
-
-  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
-       title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
-       fill = "Cadre de vie (R = rural, U = Urbain)") + theme_minimal()
-#Pareil
-       
-
-# Soutien scolaire et consommation d'alcool en semaine
-
-ggplot(fulldt) +
-  aes(x = Dalc, fill = schoolsup) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs(
-    x = "Quantite d'alcool consommee en semaine (1 etant le plus faible)",
-    y = "nombre d'eleves",
-    title = "Soutien scoalire et consommation d'alcool le week-end",
-    fill = "Beneficie de soutien scolaire") + theme_minimal()
-
-##=> Les eleves qui declarent consommer peu d'alcool en semaine, sont plus nombreux a beneficier de soutien scolaire
-       
-       
-
-              # Ne marche pas sur mon ordinateur car pas tout les paquets qui s'installent a voir si marche de manière générale. 
-#cest normale que ca ne marche pas, tu peux pas avoir 2 variables dans x (sauf erreur de ma part) et la 2eme variable sappelle paid pas paidclass, je te l'aisse corriger sinon je vais le faire a ta place? 
-              
-#Test Hugo
-              #Structure Familiale
-              
-              #Travail sur la cohabitation des parents
-             
-              table(fulldt$Pstatus)
-              mode(fulldt$Pstatus) 
-              
-              ggplot(fulldt)+
-                aes(x = Dalc,y = Pstatus, fill = Pstatus)+
-                scale_fill_hue(direction=1)+
-                geom_boxplot()+
-                labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
-                theme_bw()
-              
-              ggplot(fulldt)+
-                aes(x = Walc,y = Pstatus, fill = Pstatus)+
-                scale_fill_hue(direction=1)+
-                geom_boxplot()+
-                labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
-                theme_bw()
-              
-#Je ne sais pas si il y n'a aucune différence entre les élèves avec des parents séparés et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
-              
-              #Travail sur la qualité des relations familiales
-              table(fulldt$famrel)
-              
-              ggplot(fulldt)+
-                aes(x = Dalc, y = famrel, fill=famrel)+
-                scale_fill_hue(direction = 1)+
-                geom_boxplot()+
-                labs(x = "Consommation d alcool en semaine", y = "qualite des relations familiales", title="Lien entre conso d alcool en semaine et relation familiale")+
-                theme_bw()
-              # Ca marche pas et je comprends pas pourquoi, j ai peut etre mal choisi la mauvaise fonction pour montrer ce que je veux montrer
-              
-              ggplot(fulldt)+
-                aes(x=Dalc, y=Walc, colour=famrel)+
-                scale_fill_continuous()+
-                geom_jitter()+
-                labs(x="Consommation d alcool en semaine", y = "Consommation d alcool en weekend", title="Lien entre consommation d alcool et relation familiale")+
-                theme_bw()
-              #C est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
-            
-# En observant et en se concentrant sur les extremes (les points les plus clairs et ceux les plus sombres)
-# on peut remarquer qu'il n'y pas une si grande disparite que ça et que la qualité des relations familiales est distribuee
-# de facon assez uniforme a travers tout le nuage de point. Les eleves ont en général une bonne relation avec leur famille et il y en a peu
-# avec une mauvaise ou tres mauvaise relation familiale (1, 2) et meme en se concentrant sur ceux la, ils se repartissent de facon assez
-# equitable meme si ils ont l air d etre un peu plus présent parmis ceux qui boivent plus frequemment.
-              
-              #Travail sur le responsable legal de l eleve
-              
-              table(fulldt$guardian)
-              
-              ggplot(fulldt)+
-                aes(x = guardian, fill = guardian)+
-                geom_histogram()+
-                scale_fill_hue(direction = 1)+
-                labs(x = "responsable legal", title = "test")+
-                theme_bw()
-              #Je voulais juste voir la répartion du père ou de la mère mais la fonction table a suffit pour montrer 
-
-              #la difference de 25 - 75%
-
-              # La consommation d'alcool le week-end selon l'origine sociale 
-              
-              
-              ggplot(fulldt) +
-                
-                aes(x = Dalc, y = Medu, fill = Medu) +
-                geom_boxplot(fill = "#BDD3E8") +
-                scale_fill_brewer(palette = "OrRd", direction = 1) +
-                labs(x = "Conso alc semaine", y = "etudes mere", title = "Boxplot") +
-                theme_bw()
-              
-              ggplot(fulldt) +
-                aes(x = Dalc, y = Fedu, fill = Fedu) +
-                geom_boxplot(fill = "#BDD3E8") +
-                scale_fill_brewer(palette = "OrRd", direction = 1) +
-                labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
-                theme_bw()
-              
-              
-                            #la difference de 25 - 75%
+#Structure Familiale
+#Travail sur la cohabitation des parents
+                 
+                    table(fulldt$Pstatus)
+                    mode(fulldt$Pstatus) 
+                    
+                    ggplot(fulldt)+
+                      aes(x = Dalc,y = Pstatus, fill = Pstatus)+
+                      scale_fill_hue(direction=1)+
+                      geom_boxplot()+
+                      labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
+                      theme_bw()
+                    
+                    ggplot(fulldt)+
+                      aes(x = Walc,y = Pstatus, fill = Pstatus)+
+                      scale_fill_hue(direction=1)+
+                      geom_boxplot()+
+                      labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
+                      theme_bw()
+                    
+      #Je ne sais pas si il y n'a aucune différence entre les élèves avec des parents séparés et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
+                    
+                    #Travail sur la qualité des relations familiales
+                    table(fulldt$famrel)
+                    
+                    ggplot(fulldt)+
+                      aes(x = Dalc, y = famrel, fill=famrel)+
+                      scale_fill_hue(direction = 1)+
+                      geom_boxplot()+
+                      labs(x = "Consommation d alcool en semaine", y = "qualite des relations familiales", title="Lien entre conso d alcool en semaine et relation familiale")+
+                      theme_bw()
+                    # Ca marche pas et je comprends pas pourquoi, j ai peut etre mal choisi la mauvaise fonction pour montrer ce que je veux montrer
+                    
+                    ggplot(fulldt)+
+                      aes(x=Dalc, y=Walc, colour=famrel)+
+                      scale_fill_continuous()+
+                      geom_jitter()+
+                      labs(x="Consommation d alcool en semaine", y = "Consommation d alcool en weekend", title="Lien entre consommation d alcool et relation familiale")+
+                      theme_bw()
+                    #C est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
+                  
+      # En observant et en se concentrant sur les extremes (les points les plus clairs et ceux les plus sombres)
+      # on peut remarquer qu'il n'y pas une si grande disparite que ça et que la qualité des relations familiales est distribuee
+      # de facon assez uniforme a travers tout le nuage de point. Les eleves ont en général une bonne relation avec leur famille et il y en a peu
+      # avec une mauvaise ou tres mauvaise relation familiale (1, 2) et meme en se concentrant sur ceux la, ils se repartissent de facon assez
+      # equitable meme si ils ont l air d etre un peu plus présent parmis ceux qui boivent plus frequemment.
+                    
+                    #Travail sur le responsable legal de l eleve
+                    
+                    table(fulldt$guardian)
+                    
+                    ggplot(fulldt)+
+                      aes(x = guardian, fill = guardian)+
+                      geom_histogram()+
+                      scale_fill_hue(direction = 1)+
+                      labs(x = "responsable legal", title = "test")+
+                      theme_bw()
+                    #Je voulais juste voir la répartion du père ou de la mère mais la fonction table a suffit pour montrer 
+      
+                    #la difference de 25 - 75%
+      
+                    # La consommation d'alcool le week-end selon l'origine sociale 
+                    
+                    
+                    ggplot(fulldt) +
+                      
+                      aes(x = Dalc, y = Medu, fill = Medu) +
+                      geom_boxplot(fill = "#BDD3E8") +
+                      scale_fill_brewer(palette = "OrRd", direction = 1) +
+                      labs(x = "Conso alc semaine", y = "etudes mere", title = "Boxplot") +
+                      theme_bw()
+                    
+                    ggplot(fulldt) +
+                      aes(x = Dalc, y = Fedu, fill = Fedu) +
+                      geom_boxplot(fill = "#BDD3E8") +
+                      scale_fill_brewer(palette = "OrRd", direction = 1) +
+                      labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
+                      theme_bw()
+                    
+                    
+                                  #la difference de 25 - 75%
