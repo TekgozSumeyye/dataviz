@@ -517,23 +517,14 @@ ggplot(fulldt) +
 
 #Travail sur la qualité des relations familiales
 table(fulldt$famrel)
-                    
-                    ggplot(fulldt)+
-                      aes(x = Dalc, y = famrel, fill=famrel)+
-                      scale_fill_hue(direction = 1)+
-                      geom_boxplot()+
-                      labs(x = "Consommation d alcool en semaine", y = "qualite des relations familiales", title="Lien entre conso d alcool en semaine et relation familiale")+
-                      theme_bw()
-                    # Ca marche pas et je comprends pas pourquoi, j ai peut etre mal choisi la mauvaise fonction pour montrer ce que je veux montrer
-                    
-                    ggplot(fulldt)+
-                      aes(x=Dalc, y=Walc, colour=famrel)+
-                      scale_fill_continuous()+
-                      geom_jitter()+
-                      labs(x="Consommation d alcool en semaine", y = "Consommation d alcool en weekend", title="Lien entre consommation d alcool et relation familiale")+
-                      theme_bw()
-                    #C est peut etre mieux avec les nuages de points, je me demande si y a pas moyen de garder juste les extremes pour "famrel" mais je sais pas si c'est possible
-                  
+ 
+ggplot(fulldt)+
+  aes(x=famrel, y=Walc, colour=famrel)+
+  scale_fill_continuous()+
+  geom_jitter()+
+  labs(x="Relation familiale", y = "Consommation d alcool en semaine", title="Lien entre consommation d alcool en semaine et relation familiale")+
+  theme_bw()
+
       # En observant et en se concentrant sur les extremes (les points les plus clairs et ceux les plus sombres)
       # on peut remarquer qu'il n'y pas une si grande disparite que ça et que la qualité des relations familiales est distribuee
       # de facon assez uniforme a travers tout le nuage de point. Les eleves ont en général une bonne relation avec leur famille et il y en a peu
