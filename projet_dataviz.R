@@ -471,7 +471,7 @@ ggplot(fulldt) +
 #Consommation d'alcool selon la taille de la famille
 
 ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = famsize, size = famsize) +
+  aes(x = Dalc, y = Walc, colour = famsize) +
   geom_jitter() +
   scale_color_viridis_d(option = "plasma", direction = 1) +
   labs(
@@ -490,22 +490,31 @@ ggplot(fulldt) +
 table(fulldt$Pstatus)
 mode(fulldt$Pstatus) 
                     
-ggplot(fulldt)+
-aes(x = Dalc,y = Pstatus, fill = Pstatus)+
-scale_fill_hue(direction=1)+
-geom_boxplot()+
-labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
-theme_bw()
+ggplot(fulldt) +
+  aes(x = Dalc, fill = Pstatus, colour = Pstatus) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation en semaine",
+    y = "Effectifs",
+    title = "Consommation d'alcool en semaine selon la cohabitation parentale"
+  ) +
+  theme_minimal()
                     
-ggplot(fulldt)+
-aes(x = Walc,y = Pstatus, fill = Pstatus)+
-scale_fill_hue(direction=1)+
-geom_boxplot()+
-labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
-theme_bw()
+ggplot(fulldt) +
+  aes(x = Walc, fill = Pstatus, colour = Pstatus) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation le weekend",
+    y = "Effectifs",
+    title = "Consommation d'alcool le weekend selon la cohabitation parentale"
+  ) +
+  theme_minimal()
                     
-#Je ne sais pas si il y n'a aucune différence entre les élèves avec des parents séparés et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
-                    
+
 #Travail sur la qualité des relations familiales
 table(fulldt$famrel)
                     
