@@ -158,7 +158,7 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
 
   #a)profil general des consommateurs d'alcool, afin d'etablir une premiere typologie general :
 
-  #Visualisation des consommations d'alcool weekend et semaine
+#Visualisation des consommations d'alcool weekend et semaine
 #Consommation semaine
 table(fulldt$Dalc)
 
@@ -209,7 +209,21 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex))+   geom_jitter(position=po
 #comprises dans le 4) que la semaine (la majorit√© √©tant comprises entre le 3 et 4). 
 
 #Les femmes consommerai plus d‚Äôalcool durant le week-end (entre le 2 et le 3) qu‚Äôen semaine (majorit√© en 1). 
-#SUMEYYE ANALYSE
+
+# La consommation d'alcool la semaine selon l'environnement (rural/urbain)
+
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=position_jitter(0.2))
+
+ggplot(fulldt) +
+  aes(x = Walc, fill = address) +
+  geom_histogram(bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
+       title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
+       fill = "Cadre de vie (R = rural, U = Urbain)") +
+  theme_minimal()
+
+
 ggplot(fulldt) +
   aes(x = Dalc, y = G3, colour = Dalc) +
   geom_jitter(size = 1.5) +
@@ -220,9 +234,8 @@ ggplot(fulldt) +
     title = "Conso alcool semaine notes"
   ) +
   theme_minimal()
+#Manque analyse
 
-ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=position_jitter(0.2))
-#MANQUE ANALYSE?
 
 
 
@@ -230,15 +243,18 @@ ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=
 
 #b)Recherche plus pouss√©e des raisons d'une consommation d'alcool ¬´excessive¬ª :
 
+
+
+
 # Consomation "excessive" d'alcool selon le soutien scolaire : variable schoolsup :
 ggplot(fulldt) +
-  aes(x = Dalc + Walk, fill = schoolsup ) +
+  aes(x = Dalc, fill = schoolsup ) +
   geom_histogram(bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
+    x = "consomation d'alcool en semaine" ,
     y = "Nombres d'eleves" ,
-    title = "Le soutien scolaire et la consomation excessive d'alcool",
+    title = "Le soutien scolaire et la consomation d'alcool",
     fill = "Beneficie de soutien scolaire"
   ) +
   theme_minimal()
@@ -278,26 +294,39 @@ ggplot(fulldt) +
 
 
 
+
+
+
+
 #Consommation d'alcool selon job mere
 ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = Mjob, size = Mjob) +
-  geom_jitter() +
-  scale_color_viridis_d(option = "plasma", direction = 1) +
+  aes(x = Mjob, fill = Mjob) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
   labs(
-    x = "Consommation alcool semaine",
-    y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction du job de la mere"
+    x = "MÈtiers de la mËre",
+    y = "Effectifs",
+    title = "Consommation d'alcool des ÈlËves selon le mÈtiers de la mËre "
   ) +
-  theme_bw()
+  theme_minimal() +
+  facet_wrap(vars(Dalc))
 
-
-
-
-#Analyse Hugo
+#Consommation d'alcool selon job du pere
+ggplot(fulldt) +
+  aes(x = Fjob, fill = Fjob) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "MÈtiers du pËre",
+    y = "Effectifs",
+    title = "Consommation d'alcool des ÈlËves selon le mÈtiers du pËre "
+  ) +
+  theme_minimal() +
+  facet_wrap(vars(Dalc))
 
 #Notes G3
 ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = , size = G3) +
+  aes(x = Dalc, y = Walc, colour = school, size = G3) +
   geom_jitter() +
   scale_color_hue(direction = 1) +
   labs(
@@ -329,11 +358,8 @@ ggplot(fulldt) +
 # qui causerait cette baisse des notes et cette addiction a la fois. C'est pour cela que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des eleves.
 
 
-#Analyse Juliette
 
 table(fulldt$G3)
-
-#Sumeyye
 ggplot(fulldt) +
   aes(x = G3, y = sex) +
   geom_boxplot(fill = "#BDD3E8") +
@@ -372,6 +398,7 @@ ggplot(fulldt) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
 
+#MANQUE MEDU ET FEDU BOXPLOT
 
 
 # Consomation d'alcool excessive en semaine selon le soutien scolaire familial : variable famsup :
@@ -455,42 +482,32 @@ ggplot(fulldt) +
   theme_bw()
 
 
-# La consommation d'alcool la semaine selon l'environnement (rural/urbain)
-
-ggplot(fulldt) +
- aes(x = Walc, fill = address) +
- geom_histogram(bins = 30L) +
- scale_fill_hue(direction = 1) +
- labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
- title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
- fill = "Cadre de vie (R = rural, U = Urbain)") +
- theme_minimal()
 
 
 #Structure Familiale
 #Travail sur la cohabitation des parents
                  
-                    table(fulldt$Pstatus)
-                    mode(fulldt$Pstatus) 
+table(fulldt$Pstatus)
+mode(fulldt$Pstatus) 
                     
-                    ggplot(fulldt)+
-                      aes(x = Dalc,y = Pstatus, fill = Pstatus)+
-                      scale_fill_hue(direction=1)+
-                      geom_boxplot()+
-                      labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
-                      theme_bw()
+ggplot(fulldt)+
+aes(x = Dalc,y = Pstatus, fill = Pstatus)+
+scale_fill_hue(direction=1)+
+geom_boxplot()+
+labs(x = "Consommation en semaine", y = "Cohabitation parentale", title = "Lien entre consommation en semaine et parents vivant ensemble")+
+theme_bw()
                     
-                    ggplot(fulldt)+
-                      aes(x = Walc,y = Pstatus, fill = Pstatus)+
-                      scale_fill_hue(direction=1)+
-                      geom_boxplot()+
-                      labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
-                      theme_bw()
+ggplot(fulldt)+
+aes(x = Walc,y = Pstatus, fill = Pstatus)+
+scale_fill_hue(direction=1)+
+geom_boxplot()+
+labs(x = "Consommation durant le weekend", y = "Cohabitation parentale", title = "Lien entre consommation le weekend et parents vivant ensemble")+
+theme_bw()
                     
-      #Je ne sais pas si il y n'a aucune diff√©rence entre les √©l√®ves avec des parents s√©par√©s et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
+#Je ne sais pas si il y n'a aucune diff√©rence entre les √©l√®ves avec des parents s√©par√©s et ceux avec des parents habitant ensemble ou si mon code ne marche juste pas. 
                     
-                    #Travail sur la qualit√© des relations familiales
-                    table(fulldt$famrel)
+#Travail sur la qualit√© des relations familiales
+table(fulldt$famrel)
                     
                     ggplot(fulldt)+
                       aes(x = Dalc, y = famrel, fill=famrel)+
@@ -526,8 +543,7 @@ ggplot(fulldt) +
                       theme_bw()
                     #Je voulais juste voir la r√©partion du p√®re ou de la m√®re mais la fonction table a suffit pour montrer 
       
-                    #la difference de 25 - 75%
-      
+
                     # La consommation d'alcool le week-end selon l'origine sociale 
                     
                     
@@ -545,6 +561,4 @@ ggplot(fulldt) +
                       scale_fill_brewer(palette = "OrRd", direction = 1) +
                       labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
                       theme_bw()
-                    
-                    
-                                  #la difference de 25 - 75%
+           
