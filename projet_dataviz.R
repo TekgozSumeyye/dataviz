@@ -148,10 +148,10 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Ici aussi, la catégorie "autres" se démarque des autres, suivi de services.
-#Contrairement aux mères, les pères travaillent beaucoup plus dans des métiers
-#de catégories "autres" ou services, alors qu'il y a une part importante de mère
-#travaillant dans éducation, santé ou des mères aux foyers.
+#Ici aussi, la cat?gorie "autres" se d?marque des autres, suivi de services.
+#Contrairement aux m?res, les p?res travaillent beaucoup plus dans des m?tiers
+#de cat?gories "autres" ou services, alors qu'il y a une part importante de m?re
+#travaillant dans ?ducation, sant? ou des m?res aux foyers.
 
 
 #### III. Visualision des donnees afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
@@ -304,9 +304,9 @@ ggplot(fulldt) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(
-    x = "Métiers de la mère",
+    x = "M?tiers de la m?re",
     y = "Effectifs",
-    title = "Consommation d'alcool des élèves selon le métiers de la mère "
+    title = "Consommation d'alcool des ?l?ves selon le m?tiers de la m?re "
   ) +
   theme_minimal() +
   facet_wrap(vars(Dalc))
@@ -317,9 +317,9 @@ ggplot(fulldt) +
   geom_bar() +
   scale_fill_hue(direction = 1) +
   labs(
-    x = "Métiers du père",
+    x = "M?tiers du p?re",
     y = "Effectifs",
-    title = "Consommation d'alcool des élèves selon le métiers du père "
+    title = "Consommation d'alcool des ?l?ves selon le m?tiers du p?re "
   ) +
   theme_minimal() +
   facet_wrap(vars(Dalc))
@@ -363,7 +363,7 @@ table(fulldt$G3)
 ggplot(fulldt) +
   aes(x = G3, y = sex) +
   geom_boxplot(fill = "#BDD3E8") +
-  labs(x = "Notes G3", y = "Sexe", title = "Boites à moustaches du sexe sur les notes G3") +
+  labs(x = "Notes G3", y = "Sexe", title = "Boites ? moustaches du sexe sur les notes G3") +
   theme_bw()
 #Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
 #Les notes medians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
@@ -377,7 +377,7 @@ ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
-  labs(x = "Notes G3", y = "Job mere", title = "Boites à moustaches du job de la mere sur les notes G3 ") +
+  labs(x = "Notes G3", y = "Job mere", title = "Boites ? moustaches du job de la mere sur les notes G3 ") +
   theme_bw()
 #Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
 #On observe selon le boxplot que les eleves ayant une mere qui est soit enseignante, soit dans la sante ou a la maison ont leur notes minimums comprise entre 5 et 7. 
@@ -525,11 +525,12 @@ ggplot(fulldt)+
   labs(x="Relation familiale", y = "Consommation d alcool en semaine", title="Lien entre consommation d alcool en semaine et relation familiale")+
   theme_bw()
 
-      # En observant et en se concentrant sur les extremes (les points les plus clairs et ceux les plus sombres)
-      # on peut remarquer qu'il n'y pas une si grande disparite que Ã§a et que la qualitÃ© des relations familiales est distribuee
-      # de facon assez uniforme a travers tout le nuage de point. Les eleves ont en gÃ©nÃ©ral une bonne relation avec leur famille et il y en a peu
-      # avec une mauvaise ou tres mauvaise relation familiale (1, 2) et meme en se concentrant sur ceux la, ils se repartissent de facon assez
-      # equitable meme si ils ont l air d etre un peu plus prÃ©sent parmis ceux qui boivent plus frequemment.
+      # Concernant les deux tableaux sur le lien entre relation familiale et consommation d'alcool (un pour la semaine et un pour le week end).
+      # On remarque une tendance generale sur les deux tableaux, etant que les reponses sont distribuees de facon assez uniforme a travers le nuage de points.
+      # Si les relations familiales impactaient la consommation d'alcool, on aurait du voir une concentration de point
+      # en haut Ã  gauche et en bas a droite des tableaux. Au lieu de ca, les points sont distribues de facon similaire
+      # entre ceux ayant les pires relations et ceux ayant les meilleures relations familiales. La seule difference est que l'on remarque
+      # que les gens ont tendance a plus consommer en week end qu'en semaine comme le confirme un de nos tableaux precedents.
                     
                     #Travail sur le responsable legal de l eleve
                     
