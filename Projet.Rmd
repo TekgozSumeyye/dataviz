@@ -2,7 +2,8 @@
 title: "Projet outils et logiciels d'analyse des données"
 author: "Tekgoz Sumeyye"
 date: '2022-12-11'
-output: html_document
+output:
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -615,6 +616,7 @@ Cependant on peut imaginer une hypothèse qui est que ceux qui consomment en sem
 Cependant, tout comme l'addiction a la marijuana, il faut voir si c'est l'addiction a l'alcool en elle même qui cause la baisse des notes ou un environnement social particulièrement précaire qui causerait cette baisse des notes et cette addiction a la fois. C'est pour cela que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des élèves.
 
 ##### Impact du sexe sur les notes G3
+
 ```{r}
 table(fulldt$G3)
 ggplot(fulldt) +
@@ -630,6 +632,7 @@ Par contre, le minimum est plus élevé chez les garçon, le maximum aussi est p
 Cela s'explique que les notes des filles sont similaires et que globalement les filles ont des notes élevées alors que chez les garçons, malgré quelques bonnes notes, ils ont plutôt des notes moyennes. 
 
 ##### Impact du métier de la mère sur les notes G3
+
 ```{r}
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
@@ -650,6 +653,7 @@ Le minimum de mère-sante est de 7 et le maximum est de 20 contrairement aux mè
 Par contre, l'écart interquartile est vraiment important pour les mères-sante, ce qui signifie que les notes sont variables. 
 
 ##### Impact du métier du père sur les notes G3
+
 ```{r}
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
@@ -665,6 +669,7 @@ Le maximum le plus élevé appartient à un élève qui a un père travaillant d
 La boites à moustache de père-professeur est particulièrement différentes des autres, car le premier et troisième quartile sont supérieur aux autres, les notes sont généralement compris entre 11 et 16. Egalement les pères-santé ont un médian légèrement supérieur aux 3 autres catégories, le fait de faire des études peut donc impactés les notes de leurs enfants. Les notes minimum de autres, à la maison et professeurs sont identiques. 
 
 ##### Impact du tuteur sur les notes G3
+
 ```{r}
 ggplot(fulldt) +
   aes(x = G3, y = guardian, fill = guardian) +
