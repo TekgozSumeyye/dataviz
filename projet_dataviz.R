@@ -1,66 +1,55 @@
-#Chemin des bases de donnees
+#Chemin importation des bases de données
 path <- file.path("C:", "Users", "tekgo", "Documents", "GitHub", "dataviz", fsep="\\")
 setwd(path)
 
-setwd("C:/Users/Aurore/OneDrive/Bureau/M2 ASC/Premier Semestre/Outil et logiciel d'analyse/Outils et analyse de donnÃ©es")
+#Version de R : R version 4.1.3 (2022-03-10)
 
-#R version 4.1.3 (2022-03-10)
-
-#TELECHARGEMENT DES LIBRAIRIES
+#Téléchargement des librairies 
 library(readr)
 library(coefplot)
 library(ggplot2)
 library(labelled)
 library(dplyr)
-install.packages("RColorBrewer")
 library(RColorBrewer)
+library(GGally)
+library(scales)
 
-#IMPORTATION DES BASES DE DONNEES
+#Importation de la base de données 
 maths <- read_csv("Maths.csv")
 Portuguese <- read_csv("Portuguese.csv")
 
-####I. Introduction####
+# I- Introduction 
 
-#Ces donnees portent sur les resultats des eleves dans l'enseignement 
-#secondaire de deux ecoles portugaises. Les attributs des donnees 
-#comprennent les notes des eleves, les caracteristiques demographiques, 
-#sociales et scolaires, et ont ete collectes a l'aide de rapports et de 
-#questionnaires scolaires. Deux ensembles de donnees sont fournis concernant
-#les performances dans deux matieres distinctes : Les mathematiques (mat) et
-#la langue portugaise (por). 
-
-#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les resultats
-#scolaires, l'idee est de determiner plus geralement quels pourraient etre les facteurs affectant la
-#reussite scolaire dans le contexte des jeux de donnees dont nous disposons.
-
+#Ces données portent sur les résultats des élèves dans l'enseignement secondaire de deux écoles portugaises. Les attributs des données comprennent les notes des élèves, les caractéristiques démographiques, sociales et scolaires, et ont été collectés a l'aide de rapports et de questionnaires scolaires. Deux ensembles de données sont fournis concernant les performances dans deux matières distinctes : Les mathématiques (mat) et la langue portugaise (por).
+#A partir de l'analyse du lien qui pourrait exister entre la consommation d'alcool et les résultats scolaires, l'idée est de déterminer plus généralement quels pourraient être les facteurs affectant la réussite scolaire dans le contexte des jeux de données dont nous disposons.
 N1 <- nrow(maths)
 N2 <- nrow(Portuguese)
-#Pour la base de donnee maths, il y a 395 observations et 33 variables.
-#Pour la base de donnee portuguese, il y a 649 observations et 33 variables identiques avec la 1ere bdd. 
+
+#Pour la base de donnée maths, il y a 395 observations et 33 variables. Pour la base de donnée portuguese, il y a 649 observations et 33 variables identiques avec la première base de donnée.
+
+#Nous avons décidé de rassembler les deux bases de données Avec str, on visualise les premières données des variables, et on regarde si ce sont des variables qualitative ou quantitatives
 
 fulldt<-bind_rows(maths, Portuguese)
 nrow(fulldt)
 str(fulldt)
-#Avec str, on visualise les premieres donnees des variables, et on regarde si ce sont des variables qualitative ou quantitatives
 
+# II- Visualisation des données 
+## a) Ecole
 
-#### II. Visualisation des donnees####
-
-# a) Ecole
 ggplot(as.data.frame(table(fulldt$school))) +
-     geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
-                           stat = 'identity') +
-     scale_fill_manual(values=c("#56B4E9", "#E69F00")) +
-     ggtitle("Repartition de l'ecole") +
-     xlab("Ecole") +
-     ylab("Effectifs") +
-     theme_bw() +
-     theme(axis.text.x = element_text(face = 'bold', size = 10),
-                     axis.text.y = element_text(face = 'bold', size = 10))
+  geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
+           stat = 'identity') +
+  scale_fill_manual(values=c("#56B4E9", "#E69F00")) +
+  ggtitle("Répartition de l'école") +
+  xlab("Ecole") +
+  ylab("Effectifs") +
+  theme_bw() +
+  theme(axis.text.x = element_text(face = 'bold', size = 10),
+        axis.text.y = element_text(face = 'bold', size = 10))
 
-#Pour fulldt, il y a 772 eleves scolarises a Gabriel Pereira et 272  a Mousinho da Silveira. 
+#Pour la base fulldt, il y a 772 élèves scolarises à Gabriel Pereira et 272 à Mousinho da Silveira.
 
-# b) sexe en fonction de l'ecole
+## b) Le sexe en fonction de l'école
 ggplot(fulldt) +
   aes(x = school, fill = sex) +
   geom_bar() +
@@ -72,11 +61,10 @@ ggplot(fulldt) +
   ) +
   theme_minimal()
 
-#Il y a 591 filles et 453 garcons au sein des 2 ecoles
-#La proportion de filles est plus importantes au sein de l'ecole MS. 
+#Il y a 591 filles et 453 garçons au sein des 2 écoles.
+#La proportion de fille est plus importante au sein de l'école Mousinho da Silveira.
 
-
-# c)Age en fonction du sexe
+## c) Age en fonction du sexe
 ggplot(fulldt) +
   aes(x = age, fill = sex) +
   geom_histogram(bins = 30L) +
@@ -88,10 +76,13 @@ ggplot(fulldt) +
   ) +
   theme_minimal()
 table(fulldt$age)
-#Il y a tres peu d'eleves au dela de 19 ans, les eleves au dela de cette age sont surement du a des redoublements au cours de leurs scolarites.
 
-# d) Adresse
-#Adresse en fonction de ecole
+#Il y a très peu d'élèves au delà de 19 ans, les élèves au delà de cette âge sont sûrement dû à des redoublements au cours de leurs scolarités.
+
+## d) Adresse
+
+### Adresse en fonction de l'école
+
 ggplot(fulldt) +
   aes(x = address, fill = school) +
   geom_bar() +
@@ -99,12 +90,13 @@ ggplot(fulldt) +
   labs(
     x = "Adresse",
     y = "Effectif",
-    title = "Repartition de l'adresse (U ou R) en fonction de l'ecole"
+    title = "Repartition de l'adresse (U ou R) en fonction de l'école"
   ) +
   theme_minimal()
-#Pour l'ecole MS, il y a une repartition approximative des eleves vivant dans une zone urbaine ou rurale alors que au contraire pour l'ecole GP, une grande partie vivent dans une zone urbaine. 
 
-#Visualisation seulement adresse
+#Pour l'école MS, il y a une répartition approximative des élèves vivant dans une zone urbaine ou rurale alors que au contraire pour l'école GP, une grande partie vivent dans une zone urbaine.
+
+### Seulement adresse
 as.data.frame(table(fulldt$address))
 ggplot(as.data.frame(table(fulldt$address))) +
   geom_bar(aes(x = Var1, y = Freq,  fill = Var1), 
@@ -117,10 +109,11 @@ ggplot(as.data.frame(table(fulldt$address))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 table(fulldt$address)
-#Il y a 285 eleves vivant dans une zone rurale et 759 dans une zone urbaine
 
-#e) Emploi pere
+#Il y a 285 élèves vivant dans une zone rurale et 759 dans une zone urbaine.
 
+
+## e) Emploi du père
 as.data.frame(table(fulldt$Fjob))
 ggplot(as.data.frame(table(fulldt$Fjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
@@ -132,11 +125,13 @@ ggplot(as.data.frame(table(fulldt$Fjob))) +
   theme_bw() +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
-#Nous observons que la categorie "les autres" se demarque des 3 autres categories (a la maison, sante et professeurs)
 
+#Nous observons que la catégorie "les autres" se démarque des 3 autres catégories (à la maison, santé et professeurs)
 
-#f) Emploi de la mere
+## f) Emploi de la mère
+
 as.data.frame(table(fulldt$Mjob))
+
 ggplot(as.data.frame(table(fulldt$Mjob))) +
   geom_bar(aes(x = Var1, y = Freq, fill = Var1), 
            stat = 'identity') +
@@ -148,82 +143,44 @@ ggplot(as.data.frame(table(fulldt$Mjob))) +
   theme(axis.text.x = element_text(face = 'bold', size = 10),
         axis.text.y = element_text(face = 'bold', size = 10))
 
-#Ici aussi, la cat?gorie "autres" se d?marque des autres, suivi de services.
-#Contrairement aux m?res, les p?res travaillent beaucoup plus dans des m?tiers
-#de cat?gories "autres" ou services, alors qu'il y a une part importante de m?re
-#travaillant dans ?ducation, sant? ou des m?res aux foyers.
+#Ici aussi, la catégorie "autres" se démarque des autres, suivi de services. Contrairement aux mères, les pères travaillent beaucoup plus dans des métiers de catégories "autres" ou services, alors qu'il y a une part importante de mère travaillant dans éducation, santé ou des mères aux foyers.
 
+## h) Maitrice de corrélation entre variables quantitatives
 
-#### III. Visualision des donnees afin d'etablir une eventuelle correlation entre la consommation d'alcool et les resultats scolaires
+ggcorr(fulldt)
 
-  #a)profil general des consommateurs d'alcool, afin d'etablir une premiere typologie general :
+#Grâce à cette matrice de corrélation, nous pouvons apercevoir les variables quantitatives corrélées, par exemple, il y a une forte corrélation entre les notes G1, G2 et G3. La consommation d'alcool en semaine et le weekend a une corrélation positive d'environ 0.5. 
+#Au contraire, il n'y a pas de corrélation entre les variables age et le temps libres par exemples. 
+#Il y a aussi une corrélation négative entre la variables échecs scolaires et les notes G1, G2 et G3, qui montre que l'échec scolaires impactes négativement les notes. 
 
-#Visualisation des consommations d'alcool weekend et semaine
-#Consommation semaine
+# III. Visualision des données afin d'établir une eventuelle corrélation entre la consommation d'alcool et les résultats scolaires
+
+## Profil général des consommateurs d'alcool, afin d'établir une premiè    re typologie general :
+
+### 1. Visualisation des consommations d'alcool weekend et semaine
+
+##### Consommation d'alcool en semaine
 table(fulldt$Dalc)
 
 ggplot(fulldt) +
   aes(x = Dalc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#En semaine, la consommation d'alcool est plutot moderer (tres faible consommation)
 
+#En semaine, la consommation d'alcool est plutôt modérer (très faible consommation).
+
+##### Consommation d'alcool le weekend 
 table(fulldt$Walc)
 
 ggplot(fulldt) +
   aes(x = Walc) +
   geom_histogram(bins = 30L, fill = "#112446") +
   theme_minimal()
-#Il y a beaucoup plus de consommation le weekend, etant donne qu'il n'y a pas cours, plus de personnes consomment excessivement de l'alcool. 
 
-#Impact alcool sur G3
-cor1 <- G3 ~ Walc + Dalc
-lm1<-lm(cor1 , data = fulldt)
-coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
-#La consommation d'alcool en semaine a plus d'impact negatif sur les resultats scolaires G3 que la consommation le weekend. 
-#Les deux coefficient est negative, mais l'intervalle de confiance de Walc couvre 0, donc le coefficient de Walc n'est pas significatif. 
-#Cela peut etre du au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux revisions donc leurs notes sont impact?s. 
-#Dalc= -0.39 et walc -0.17
-
-cor2 <- age ~ Walc + Dalc
-lm2<-lm(cor2 , data = fulldt)
-coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
-#Ici, nous cherchons a comprendre si la consommations d'alcool en semaine ou en weekend depend de l'age
-#Les deux coefficient sont positive, mais etant donne que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a dalc. 
-#La consommation d'alcool en semaine depend plus de l'age que la consommation le weekend, c'est a dire que par exemple, en fonction de l'age, les personnes font plus attention ? leurs consommations d'alcool en semaine que en weekend.  
-
-ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex))+   geom_jitter(position=position_jitter(0.2))
-# Analyse de la consommation dâ€™alcool durant le travail en semaine (Dalc) et la consommation dâ€™alcool durant le week-end
-# (Walc) selon le genre : Valeurs numÃ©riqueÂ : 1 â€“ Equivaut a tres faible et 5 â€“ equivaut Ã  tres elevee. 
-#A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine 
-#(Dalc) et en week-end (Walc)  c'est qu'il y a peu de consommation excesive dâ€™alcool que ce soit pour les homme ou pour les femmes,
-#les points Ã©tant principalement concentrer entre le nombre 1 et 1,5. 
-#Les femmes Ã  part quelques occurrences (certain point compris au-delÃ  de 5), boivent moins que les hommes qui sont
-#plus nombreux Ã  boire durant le travail en semaine (une importante rÃ©partition de points entre le 4 et le 5). 
-
-#Pour la consommation dâ€™alcool durant le week-end (Walc), il y a Ã©galement peu de consommation 
-#(majoritÃ© Ã©tant compris dans le 1) que ce soit pour les hommes ou pour les femmes . Il y a plus de consommation de la part
-#des hommes durant le week end les points bleu Ã©tant compris entre le 4 et le 5. Il y a une augmentation de la consommation dâ€™alcool pour les hommes le week-end (points bleu compris entre le 4 et le 5). 
-
-#Selon notre nuages de points les hommes consomme plus dâ€™alcool le week-end (la majoritÃ© Ã©tant 
-#comprises dans le 4) que la semaine (la majoritÃ© Ã©tant comprises entre le 3 et 4). 
-
-#Les femmes consommerai plus dâ€™alcool durant le week-end (entre le 2 et le 3) quâ€™en semaine (majoritÃ© en 1). 
-
-# La consommation d'alcool la semaine selon l'environnement (rural/urbain)
-
-ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=position_jitter(0.2))
-
-ggplot(fulldt) +
-  aes(x = Walc, fill = address) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs(x = "Consommation d'alcool pendant leweek-end ", y = "Eleves declarant boire le week-end", 
-       title = "Consommation d'alcool le week-end chez les eleves selon l'environnement ", subtitle = "Tous niveaux confondus", 
-       fill = "Cadre de vie (R = rural, U = Urbain)") +
-  theme_minimal()
+#Il y a beaucoup plus de consommation le weekend, étant donné qu'il n'y a pas cours, plus de personnes consomment excessivement de l'alcool. 
 
 
+##### Impact de l'alcool sur les notes G3
 ggplot(fulldt) +
   aes(x = Dalc, y = G3, colour = Dalc) +
   geom_jitter(size = 1.5) +
@@ -231,25 +188,282 @@ ggplot(fulldt) +
   labs(
     x = "Consommation alcool semaine",
     y = "Notes G3",
-    title = "Conso alcool semaine notes"
+    title = "Les notes G3 en fonction de la consommation d'alcool"
   ) +
   theme_minimal()
-#Manque analyse
+
+#Grace au nuage de point, on remarque que les élèves qui ont obtenue de mauvaises notes (0) sont généralement des élèves consommant très peu d'alcool, on ne retrouve pas d'élèves consommant beaucoup d'alcool dans les mauvaises notes. De plus, très peu d'élèves consomment excessivement de l'alcool en semaine, et ces élèves ont des notes obtenue entre 5 et 15. De plus, les consommateurs modérés, ont généralement des notes compris entre 7.5 et 17.5, quelques personnes se démarques en ayant obtenue de très bonne note, ce sont souvent des élèves consommant très peu d'alcool. 
+
+cor1 <- G3 ~ Walc + Dalc
+lm1<-lm(cor1 , data = fulldt)
+coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
+
+#La consommation d'alcool en semaine a plus d'impact négatif sur les résultats scolaires G3 que la consommation le weekend. 
+#Les deux coefficients est négative, mais l'intervalle de confiance de Walc couvre 0, donc le coefficient de Walc n'est pas significatif. 
+#Cela peut être dû au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux révisions donc leurs notes sont impactés. 
+
+##### Impact de l'âge sur la consommation de l'alcool
+cor2 <- age ~ Walc + Dalc
+lm2<-lm(cor2 , data = fulldt)
+coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
+
+#Ici, nous cherchons à comprendre si la consommations d'alcool en semaine ou le weekend dépend de l'âge.
+#Les deux coefficient sont positifs, mais étant donné que l'intervalle de confiance de Walc couvre 0, le coefficent n'est pas significative contrairement a Dalc. 
+#La consommation d'alcool en semaine dépend plus de l'âge que la consommation le weekend, c'est à dire que par exemple, en fonction de l'age, les personnes font plus attention à leurs consommations d'alcool en semaine que le weekend.
+
+##### Impact du sexe sur la consommation de l'alcool
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex))+   geom_jitter(position=position_jitter(0.2))
+
+#Analyse de la consommation d'alcool durant le travail en semaine (Dalc) et la consommation d'alcool durant le week-end
+#(Walc) selon le genre : Valeurs numérique: 1 est équivaut a très faible et 5 est équivaut à très élevé. 
+#A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine (Dalc) et en week-end (Walc) c'est qu'il y a peu de consommation excessive d'alcool que ce soit pour les hommes ou pour les femmes,
+#les points étant principalement concentrer entre le nombre 1 dalc et 3 walc.
+#Les femmes à part quelques occurrences (certain point compris au-dela de 5), boivent moins que les hommes qui sont plus nombreux à boire en semaine (une importante répartition de points entre le 4 et le 5). 
+
+#Pour la consommation d'alcool durant le week-end (Walc), il y a également peu de consommation 
+#(majorité étant compris dans le 1) que ce soit pour les hommes ou pour les femmes . Il y a plus de consommation de la part
+#des hommes durant le week end les points bleu étant compris entre le 4 et le 5. Il y a une augmentation de la consommation d'alcool pour les hommes le week-end (points bleu compris entre le 4 et le 5). 
+
+#Selon notre nuages de points les hommes consomme plus d'alcool le week-end (la majorité étant 
+#comprises dans le 4) que la semaine (la majorité étant comprises entre le 3 et 4). 
+
+#Les femmes consommerai plus d'alcool durant le week-end (entre le 2 et le 3) qu'en semaine (majorité en 1). 
+
+##### Impact de l'adresse sur la consommation de l'alcool
+table(fulldt$address, fulldt$Dalc)
+table(fulldt$address, fulldt$Walc)
+Dalc<-c(table(fulldt$Dalc))
+Walc<-c(table(fulldt$Walc))
+data.frame(Dalc, Walc)
+
+ggplot(fulldt, aes(x = Walc, y = Dalc , color = address))+ geom_jitter(position=position_jitter(0.2))
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = address) +
+  geom_bar(position = "fill") +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool en semaine ", y = "Pourcentage d'élève buvant en semaine", 
+       title = "Consommation d'alcool en semaine chez les élèves selon l'environnement ", fill = "Cadre de vie (R = rural, U = Urbain)") +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
+
+#Le pourcentage d'élèves consommant de l'alcool en semaine est plus élevé pour les élèves habitant dans une zone urbaine (environ 75% pour les catégories 1, 2, 4 et 5). 
+
+ggplot(fulldt) +
+  aes(x = Walc, fill = address) +
+  geom_bar(position = "fill") +
+  scale_fill_hue(direction = 1) +
+  labs(x = "Consommation d'alcool le week-end ", y = "Pourcentage d'élève buvant le week-end", 
+       title = "Consommation d'alcool le week-end chez les élèves selon l'environnement ", fill = "Cadre de vie (R = rural, U = Urbain)") +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
+
+#Le pourcentage d'élèves consommant de l'alcool le weekend est presque identique que le pourcentage d'élèves consomment de l'alcool en semaine, ici aussi, les élèves sont plus nombreux à déclarer habiter dans une zone urbaine. 
+
+##### La consommation d'alcool le week-end selon l'origine sociale 
+
+#Origine sociale (Medu / Fedu / Mjob / Fjob)
+
+###### Mjob (geom_bar, geom_jitter)
+ggplot(fulldt) +
+  aes(x = Mjob, fill = Mjob) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Métiers de la mère",
+    y = "Effectifs",
+    title = "Consommation d'alcool des élèves selon le métiers de la mère "
+  ) +
+  theme_minimal() +
+  facet_wrap(vars(Dalc))
+
+#Etant donné que les élèves déclarant boire de l'alcool est plus élèves que les autres, nous avons meilleur graphique. Nous remarquons que les mères travaillant dans "les autres", services ou encore des mères à la maison ont des enfants qui consomment beaucoup plus que les enfants ayant une mère travaillant dans la santé ou professeur. 
+
+#Consommation d'alcool selon job mere
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = Mjob) +
+  geom_jitter() +
+  scale_color_viridis_d(option = "plasma", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point consommation alcool en fonction du job de la mere"
+  ) +
+  theme_bw()
+
+#Comme analyser précédemment, si on observe dans ce nuage de point la partie consommant beaucoup d'alcool, on retrouve surtout des mères travaillant dans les services, autres ou des mères au foyer. De plus, nous observons qu'il y a un regroupement de points pour les échelles de consommation de le weekend et principalement en 1 pour la consommation en semaine.
+
+###### Fjob (geom_bar)
+ggplot(fulldt) +
+  aes(x = Fjob, fill = Fjob) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Métiers du père",
+    y = "Effectifs",
+    title = "Consommation d'alcool des élèves selon le métiers du père "
+  ) +
+  theme_minimal() +
+  facet_wrap(vars(Dalc))
+
+#Nous observons que comme pour le graphique du métier de la mère vu précédemment, on a un graphique distincte pour les élèves consommant très peu d'alcool. Pour les pères travaillant dans la catégories "autres", nous observons que leur enfants sont plus nombreux à boire de l'alcool que les autres métiers, suivi de services. 
 
 
+#la structure familiale (Pstatus / famsize / famrel / guardian / )
+table(fulldt$Pstatus)
 
+#923 élèves ont des parents vivant toujours ensemble et 121 ont des parents séparés. 
 
+ggplot(fulldt) +
+  aes(x = Dalc, fill = Pstatus, colour = Pstatus) +
+  geom_histogram(position = "fill") +
+  scale_fill_hue(direction = 1) +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation en semaine",
+    y = "Effectifs",
+    title = "Pourcentage de la consommation d'alcool en semaine selon la cohabitation parentale"
+  ) +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
 
+#On ne peut pas conclure qu'avoir des parents séparés influent la consommation d'alcool en semaine, étant donné qu'environ 85% ont des parents vivant ensemble. 
 
-#b)Recherche plus poussÃ©e des raisons d'une consommation d'alcool Â«excessiveÂ» :
+ggplot(fulldt) +
+  aes(x = Walc, fill = Pstatus, colour = Pstatus) +
+  geom_histogram(position = "fill") +
+  scale_fill_hue(direction = 1) +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation le weekend",
+    y = "Effectifs",
+    title = "Pourcentage de la consommation d'alcool le weekend selon la cohabitation parentale"
+  ) +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
 
+#La conclusion est identique pour la consommation d'alcool le weekend, nous pouvons affirmer que le fait d'avoir des parents séparés n'affecte pas la consommation d'alcool en générale. 
 
+ggplot(fulldt) +
+  aes(x = Dalc, y = Walc, colour = famsize) +
+  geom_jitter() +
+  scale_color_viridis_d(option = "plasma", direction = 1) +
+  labs(
+    x = "Consommation alcool semaine",
+    y = "Consommation alcool weekend",
+    title = "Nuage de point de la consommation d'alcool en fonction de la taille de la famille "
+  ) +
+  theme_bw()
 
+#Nous observons que pour la consommation d'alcool excessive, nous retrouvons majoritairement des points bleus, c'est à dire des élèves ayant une famille de taille supérieur à 3. 
 
-# Consomation "excessive" d'alcool selon le soutien scolaire : variable schoolsup :
+ggplot(fulldt) +
+  aes(x = Dalc, fill = famsize, colour = famsize) +
+  geom_histogram(position = "fill") +
+  scale_fill_hue(direction = 1) +
+  scale_color_hue(direction = 1) +
+  labs(
+    x = "Consommation en semaine",
+    y = "Effectifs",
+    title = "Pourcentage de la consommation d'alcool en semaine selon la taille de la famille"
+  ) +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
+
+#Grace à cet histogramme, on observe que généralement plus de la moitié des consommateurs sont issues de familles nombreuses.
+#75% des personnes déclarant boire très peu ou beaucoup d'alcool sont issues de famille nombreuses. 
+
+ggplot(fulldt) +
+  aes(x = famrel, y = Dalc, colour = famrel) +
+  geom_jitter(size = 1.5) +
+  scale_color_gradient() +
+  labs(
+    x = "relation familiale",
+    y = "Consommation d'alcool semaine",
+    title = "Consommation d'alcool en fonction des relations familiales"
+  ) +
+  theme_minimal()
+
+#Nous observons que les personnes consomment très peu d'alcool en semaine ont une très bonne relation familiale majoritairement. 
+#Généralement, les nuages de points pour les relations familiales mauvaises se regroupent pour la consommation d'alcool très faible.
+#Nous pouvons conclure que les relations familiale n'est peu être pas forcement un facteur de la consommation d'alcool chez les élèves, étant donné qu'il n'y a que 30 élèves déclarant avoir des relations mauvaises, nous pouvons pas faire une conclusion.  
+
+ggplot(fulldt) +
+  aes(x = famrel, y = Walc, colour = famrel) +
+  geom_jitter(size = 1.5) +
+  scale_color_gradient() +
+  labs(
+    x = "relation familiale",
+    y = "Consommation d'alcool le weekend",
+    title = "Consommation d'alcool le weekend en fonction des relations familiales"
+  ) +
+  theme_minimal()
+
+#Identique à la précédente interprétation, étant donné qu'il y a très peu d'élèves déclarant avoir une mauvaise relation familiale, le nuage de point n'est pas forcement approprié pour savoir si les relations familiale est un facteur de la consommation d'alcool.
+
+ggplot(fulldt) +
+  aes(x = guardian, fill = guardian, weight = Dalc) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Tuteur",
+    y = "Effectifs",
+    title = "Consommation d'alcool en semaine selon le tuteur de l'élève"
+  ) +
+  theme_minimal() +
+  facet_wrap(vars(Dalc))
+
+#Généralement, les élèves ayant comme tuteur leur mère consomment plus d'alcool, suivi du tuteur père. Dans la catégorie autres très peu consomment d'alcool. 
+
+ggplot(fulldt) +
+  aes(x = guardian, fill = guardian, weight = Walc) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = "Tuteur",
+    y = "Effectifs",
+    title = "Consommation d'alcool le weekend selon le tuteur de l'élève"
+  ) +
+  theme_minimal() +
+  facet_wrap(vars(Walc))
+
+#Ce graphique est un peu près identique que la consommation en semaine, sauf que les effectifs sont beaucoup plus important. 
+
+#L'accompagnement (variables schoolsup / famsup / paid)
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = famsup) +
+  geom_histogram(position = "fill", bins = 30) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine" ,
+    y = "Nombres d'eleves" , 
+    title = "Le soutien scolaire familial et la consomation d'alcool en semaine",
+    fill = "Beneficie de soutien scolaire familial"
+  ) +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
+
+#Les élèves consommant beaucoup d'alcool en semaine ont environ 80% de soutiens familiale, contre 65% pour des élèves consommant très peu d'alcool. Pour les personnes ayant une consommation ayant une consommation normale (3), environ 55% ne bénéficie pas de soutient familiale. 
+
+ggplot(fulldt) +
+  aes(x = Dalc, fill = paid) +
+  geom_histogram(position = "fill", bins = 30L) +
+  scale_fill_hue(direction = 1) +
+  labs (   
+    x = "consomation d'alcool en semaine",
+    y = "Nombres d'eleves" , 
+    title = "Les cours supplémentaires payés et la consomation d'alcool",
+    fill = "Cours supplémentaire"
+  ) +
+  scale_y_continuous(labels = percent) +
+  theme_minimal()
+
+#Les élèves bénéficiant du soutient scolaire consomme moins d'alcool que les élèves ne bénéficiant pas de soutient scolaire, en effet, les élèves déclarant consommés très peu d'alcool est de 20%, et de d'environ 35% pour les élèves consommant beaucoup d'alcool. 
+
 ggplot(fulldt) +
   aes(x = Dalc, fill = schoolsup ) +
-  geom_histogram(bins = 30L) +
+  geom_histogram(position = "fill", bins = 30L) +
   scale_fill_hue(direction = 1) +
   labs (   
     x = "consomation d'alcool en semaine" ,
@@ -257,74 +471,15 @@ ggplot(fulldt) +
     title = "Le soutien scolaire et la consomation d'alcool",
     fill = "Beneficie de soutien scolaire"
   ) +
+  scale_y_continuous(labels = percent) +
   theme_minimal()
 
-
-# Consomation d'alcool excessive selon le soutien scolaire familial : variable famsup :
-
-ggplot(fulldt) +
-  aes(x = Dalc + Walk, fill = famsup) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
-    y = "Nombres d'eleves" ,
-    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
+#Les personnes qui bénéficie d'un soutient scolaire ne boivent presque pas d'alcool en semaine, seulement 12,5% consomment très peu et 15% consomment beaucoup d'alcool en semaine. 
 
 
-# Consomation d'alcool excessive selon les cours supplÃ©mentaire payant : varable paidclass :
+### 2. Visualisation des facteurs impactant les notes G3
 
-ggplot(fulldt) +
-  aes(x = Dalc + Walk, fill = paidclass) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine et en week end = consomation d'alcool excessive" ,
-    y = "Nombres d'eleves" ,
-    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
-# AprÃ¨s visualisation des rÃ©sultats nous concluons qu'ils ne sont pas pertinent pour notre analyse car sont trop proche et ne sont pas signifiant.
-
-
-
-
-
-
-
-
-
-#Consommation d'alcool selon job mere
-ggplot(fulldt) +
-  aes(x = Mjob, fill = Mjob) +
-  geom_bar() +
-  scale_fill_hue(direction = 1) +
-  labs(
-    x = "M?tiers de la m?re",
-    y = "Effectifs",
-    title = "Consommation d'alcool des ?l?ves selon le m?tiers de la m?re "
-  ) +
-  theme_minimal() +
-  facet_wrap(vars(Dalc))
-
-#Consommation d'alcool selon job du pere
-ggplot(fulldt) +
-  aes(x = Fjob, fill = Fjob) +
-  geom_bar() +
-  scale_fill_hue(direction = 1) +
-  labs(
-    x = "M?tiers du p?re",
-    y = "Effectifs",
-    title = "Consommation d'alcool des ?l?ves selon le m?tiers du p?re "
-  ) +
-  theme_minimal() +
-  facet_wrap(vars(Dalc))
-
-#Notes G3
+##### Impact de l'école sur les notes G3
 ggplot(fulldt) +
   aes(x = Dalc, y = Walc, colour = school, size = G3) +
   geom_jitter() +
@@ -336,102 +491,64 @@ ggplot(fulldt) +
   ) +
   theme_bw()
 
-# Ici on utilise le nuage de point pour montrer la difference entre Ã©cole et l'influence de la consommation d'alcool sur les notes aux examens finaux (G3) 
-# car la fonction nuage de point nous permet ici de facilement montrer (ou non) la disparite entre les deux ecoles et surtout de faire ressortir les tendances statistiques 
-# sur la consommation d'alcool des eleves et peut etre d'etablir une influence sur les resultats finaux aux examens des eleves.
-# Le graphique se lit comme suit : les points en haut a droite sont ceux qui consomment le plus d'alcool a la fois en weekend et en semaine (ceux se rapprochant le plus du 5 sur l'abscisse et l'ordonnee).
-# A l'inverse, ceux etant le plus en bas a gauche (les plus proches de 1) sont ceux consommant le moins, voir pas d'alcool. En haut a gauche, se situent les personnes consommant exclusivement le weekend (1 a l'abcisse et 5 a l'ordonnee),
-# et ceux etant le plus en bas a droite sont ceux qui consomment de l'alcool exclusivement en semaine (5 a l'abscisse et 1 a l'ordonne).
-# Le premier resultat que l'on remarque est que la tendance a la consommation d'alcool est beaucoup plus importante durant le weekend que durant la semaine malgres quelques exceptions.
-# On peut expliquer cette tendance par le fait que la consommation d'alcool a l'adolescence et pour les jeunes adultes soient surtout liee a des moments sociabilites entre groupes de pair.
-# Les etudiants ayant cours en semaine, la plupart des activites sociales sont donc organisees en fin de semaine, en weekend et ces activites sont le moment propices a la consommation d'alcool en vue de sociabiliser (sorties en bars, boites, soiree chez quelqu'un).
-# Le deuxieme resultat que l'on peut noter est que les eleves de Gabirel Pereira (en rouge) sont plus nombreux a consommer de l'alcool que ceux de Mousinho da Silveira (en bleu).
-# Les eleves de GP sont aussi surtout beaucou plus representer dans des consommations intensives et notamment celles faites en semaines.
-# Difficile de dire si la difference est assez grande pour etre significative. Un debut d'analyse pour expliquer cette difference serait que Gabriel Pereira
-# est une ecole publique et donc que les eleves aient une plus grande liberte et moins d'attente au niveau du corps enseignant.
-# Le troisieme resultat est que l'on remarque que les resultats les plus bas (0, 5, 10) ont tendance a augmenter avec la consommation d'alcool
-# et surtout avec la consommation d'alcool en semaine. On ne peut pas affirmer que ce resultat soit significatif au vu de la presence de tres nombreux non-buveurs ou buveurs occasionnelle.
-# Cependant on peut imaginer une hypothese qui est que ceux qui consomment en semaine sont probablement victime d'addiction, d'alcoolisme
-# etant donne que l'addiction a l'alcool se caracterise par une consommation presque journaliere. On manque d'element pour approuver la validation d'une tel hypothese,
-# mais tout comment l'addiction a la marijuana a des consequences sur les notes, l'addiction a l'alcool pourrait entrainer des consequences sur les notes finales comme le montre le graphique.
-# Cependant, tout comme l'addiction a la marijuana, il faut voir si c'est l'addiction a l'alcool en elle meme qui cause la baisse des notes ou un environnement social particulierement precaire
-# qui causerait cette baisse des notes et cette addiction a la fois. C'est pour cela que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des eleves.
+#Ici on utilise le nuage de point pour montrer la différence entre école et l'influence de la consommation d'alcool sur les notes aux examens finaux (G3) car la fonction nuage de point nous permet ici de facilement montrer (ou non) la disparité entre les deux écoles et surtout de faire ressortir les tendances statistiques sur la consommation d'alcool des élèves et peut être d'établir une influence sur les résultats finaux aux examens des élèves. 
+#Le graphique se lit comme suit : les points en haut a droite sont ceux qui consomment le plus d'alcool a la fois en weekend et en semaine (ceux se rapprochant le plus du 5 sur l'abscisse et l'ordonnée).
+#A l'inverse, ceux étant le plus en bas a gauche (les plus proches de 1) sont ceux consommant le moins, voir pas d'alcool. En haut a gauche, se situent les personnes consommant exclusivement le weekend (1 a l'abscisse et 5 a l'ordonnée), et ceux étant le plus en bas a droite sont ceux qui consomment de l'alcool exclusivement en semaine (5 a l'abscisse et 1 a l'ordonne).
+#Le premier résultat que l'on remarque est que la tendance a la consommation d'alcool est beaucoup plus importante durant le weekend que durant la semaine malgré quelques exceptions.
+#On peut expliquer cette tendance par le fait que la consommation d'alcool a l'adolescence et pour les jeunes adultes soient surtout liée a des moments sociabilités entre groupes de pair.
+#Les étudiants ayant cours en semaine, la plupart des activités sociales sont donc organisées en fin de semaine, en weekend et ces activités sont le moment propices a la consommation d'alcool en vue de sociabiliser (sorties en bars, boites, soirée chez quelqu'un).
+#Le deuxième résultat que l'on peut noter est que les élèves de Gabirel Pereira (en rouge) sont plus nombreux a consommer de l'alcool que ceux de Mousinho da Silveira (en bleu).
+#Les élèves de GP sont aussi surtout beaucoup plus représenter dans des consommations intensives et notamment celles faites en semaines.
+#Difficile de dire si la différence est assez grande pour être significative. Un début d'analyse pour expliquer cette différence serait que Gabriel Pereira est une école publique et donc que les élèves aient une plus grande liberté et moins d'attente au niveau du corps enseignant.
+#Le troisième résultat est que l'on remarque que les résultats les plus bas (0, 5, 10) ont tendance a augmenter avec la consommation d'alcool et surtout avec la consommation d'alcool en semaine. On ne peut pas affirmer que ce résultat soit significatif au vu de la présence de très nombreux non-buveurs ou buveurs occasionnelle.
+#Cependant on peut imaginer une hypothèse qui est que ceux qui consomment en semaine sont probablement victime d'addiction, d'alcoolisme étant donne que l'addiction a l'alcool se caractérise par une consommation presque journalière. On manque d'élément pour approuver la validation d'une tel hypothèse, mais tout comment l'addiction a la marijuana a des conséquences sur les notes, l'addiction a l'alcool pourrait entraîner des conséquences sur les notes finales comme le montre le graphique.
+#Cependant, tout comme l'addiction a la marijuana, il faut voir si c'est l'addiction a l'alcool en elle même qui cause la baisse des notes ou un environnement social particulièrement précaire qui causerait cette baisse des notes et cette addiction a la fois. C'est pour cela que nous analyseront la consommation en fonction de l'origine sociale, de la structure familiale et de l'accompagnement des élèves.
 
-
-
+##### Impact du sexe sur les notes G3
 table(fulldt$G3)
 ggplot(fulldt) +
   aes(x = G3, y = sex) +
   geom_boxplot(fill = "#BDD3E8") +
-  labs(x = "Notes G3", y = "Sexe", title = "Boites ? moustaches du sexe sur les notes G3") +
+  labs(x = "Notes G3", y = "Sexe", title = "Boites à moustaches du sexe sur les notes G3") +
   theme_bw()
-#Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe feminin seulement 1.
-#Les notes medians sont plus eleves pour les filles avec environ 12 et 11 pour les garcons. 
-#Par contre, le minimum est plus eleve chez les garcon, le maximum aussi est plus eleve pour les garcons. 
-#Cela s'explique que les notes des filles sont similaires et que globalement les filles ont des notes elevees alors que chez les garcons, malgre quelques bonnes notes, ils ont plutot des notes moyennes. 
 
+#Pour le sexe masculin, il y a 2 valeurs aberrantes et pour le sexe féminin seulement 1.
+#Les notes médians sont plus élèves pour les filles avec environ 12 et 11 pour les garçons. 
+#Par contre, le minimum est plus élevé chez les garçon, le maximum aussi est plus élevé pour les garçons. 
+#Cela s'explique que les notes des filles sont similaires et que globalement les filles ont des notes élevées alors que chez les garçons, malgré quelques bonnes notes, ils ont plutôt des notes moyennes. 
 
-#BOXPLOT FJOB, MJOB, FEDU, MEDU:
-
+##### Impact du métier de la mère sur les notes G3
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
-  labs(x = "Notes G3", y = "Job mere", title = "Boites ? moustaches du job de la mere sur les notes G3 ") +
+  labs(x = "Notes G3", y = "Job mere", title = "Boites à moustaches du job de la mere sur les notes G3 ") +
   theme_bw()
-#Pour les boites a moustache du metier de la mere, il y a 6 valeurs aberrantes pour la categorie "autres", ce sont des valeurs qui sont sup?rieures ou inf?rieures aux limites d?finies par les moustaches. 
-#On observe selon le boxplot que les eleves ayant une mere qui est soit enseignante, soit dans la sante ou a la maison ont leur notes minimums comprise entre 5 et 7. 
-#ceux qui ont les notes les plus eleves sont ceux dont leur meres est enseignante (mediane superieure aux autres ainsi que le troisieme quartile). Les eleves qui ont leur mÃ¨res qui est "autre" (other) 
-#ont leur notes minimum qui est plus large (4,5 environ), sÃ»rement liÃ©es au fait que cette categorie est tres large (beaucoup de qualificatif large a linterieur). 
-#Les eleves ayant une mere enseignante (teacher) ont de meilleures notes (ayant leur mÃ©diane se rapprochant plus de 15 et                                                                       leur 3 eme quartile dÃ©passant les 15).
-#Ceux qui ont une mere a la maison  (at_home) en majorite ont des notes comprise entre 10 et 14 (la mÃ©diane etant environ a 11).
-#On peut conclure alors que la profession de la mere a une influence sur les resultats scolaire de leleve. 
-#Cela peut sexpliquer notamment par le temps disponible liees a la profession mais aussi les aides qui peuvent etre apporter
-#(par exemple le fait dautre enseignant est plus susceptible daider).
-#Le minimum de mere-sante est de 7 et le maximum est de 20 contrairement au mere-maison ou mere-service qui est de 5 et 18,5 respectivement. 
-#Par contre, l'ecart interquartile est vraiment important pour les meres-sante, ce qui signifie que les notes sont variables. 
 
+#Pour les boites à moustache du métier de la mère, il y a 6 valeurs aberrantes pour la catégorie "autres", ce sont des valeurs qui sont supérieures ou inférieures aux limites définies par les moustaches. 
+#On observe selon la boite à moustache que les élèves ayant une mère qui est soit enseignante, soit dans la sante ou à la maison ont leur notes minimums comprise entre 5 et 7. Ceux qui ont les notes les plus élèves sont ceux dont leur mères est enseignante (médiane supérieure aux autres ainsi que le troisième quartile). Les élèves qui ont leur mères qui est "autre" (other) ont leur notes minimum qui est plus large (4,5 environ), surement liées au fait que cette catégorie est très large (beaucoup de qualificatif large à lintérieur). 
+#Les élèves ayant une mère enseignante (teacher) ont de meilleures notes (ayant leur médiane se rapprochant plus de 15 et leur 3ème quartile dépassant les 15).
+#Ceux qui ont une mère à la maison  (at_home) en majorité ont des notes comprise entre 10 et 14 (la médiane étant environ à 11).
+#On peut conclure alors que la profession de la mère à une influence sur les résultats scolaires de l'élève. 
+#Cela peut s'expliquer notamment par le temps disponible liées à la profession mais aussi les aides qui peuvent être apporter
+#(par exemple le fait d'autre enseignant est plus susceptible d'aider).
+#Le minimum de mère-sante est de 7 et le maximum est de 20 contrairement aux mères-maison ou mères-service qui est de 5 et 18,5 respectivement. 
+#Par contre, l'écart interquartile est vraiment important pour les mères-sante, ce qui signifie que les notes sont variables. 
+
+##### Impact du métier du père sur les notes G3
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
   geom_boxplot() +
   scale_fill_brewer(palette = "OrRd", direction = 1) +
   labs(x = "Notes G3", y = "Job mere", title = "Boxplot") +
   theme_bw()
+#Pour les boites à moustache du métier du père, il y a 2 valeurs aberrantes pour la catégorie "services", ce sont des valeurs qui sont supérieures ou inférieures aux limites définies par les moustaches. 
+#On observe selon la boite à moustache que les élèves ayant un père
+#travaillant dans les catégories services, à la maison ou autres ont des médians similaire égales à environ 11. 
+#Le maximum le plus élevé appartient à un élève qui a un père travaillant dans les services.  
+#La boites à moustache de père-professeur est particulièrement différentes des autres, car le premier et troisième quartile sont supérieur aux autres, les notes sont généralement compris entre 11 et 16. Egalement les pères-santé ont un médian légèrement supérieur aux 3 autres catégories, le fait de faire des études peut donc impactés les notes de leurs enfants. Les notes minimum de autres, à la maison et professeurs sont identiques. 
 
-#MANQUE MEDU ET FEDU BOXPLOT
-
-
-# Consomation d'alcool excessive en semaine selon le soutien scolaire familial : variable famsup :
-ggplot(fulldt) +
-  aes(x = Dalc, fill = famsup) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine" ,
-    y = "Nombres d'eleves" , 
-    title = "Le soutien scolaire familial et la consomation d'alcool en semaine",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
-
-
-# Consomation d'alcool excessive selon les cours supplÃ©mentaire payant : varable paidclass :
-
-ggplot(fulldt) +
-  aes(x = Dalc, fill = paid) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  labs (   
-    x = "consomation d'alcool en semaine",
-    y = "Nombres d'eleves" , 
-    title = "Le soutien scolaire familial et la consomation excessive d'alcool",
-    fill = "Beneficie de soutien scolaire familial"
-  ) +
-  theme_minimal()
-#Les eleves qui declarent consommer peu d'alcool en semaine, sont plus nombreux a beneficier de soutien scolaire
-     
-
-#FAIRE ANALYSE TUTEUR SUR G3
+##### Impact du tuteur sur les notes G3
 ggplot(fulldt) +
   aes(x = G3, y = guardian, fill = guardian) +
   geom_boxplot() +
@@ -439,85 +556,15 @@ ggplot(fulldt) +
   labs(
     x = "Notes G3",
     y = "Tuteur",
-    title = "Boxplot impact tuteur eleve sur G3"
+    title = "Boites à moustache de l'impact du tuteur de l'élève sur les notes G3"
   ) +
   theme_minimal()
 
+#Les élèves ayant comme père et mère tuteur sont identiques au niveau des répartitions de notes, la note médian des élèves ayant un père tuteur est de 12 et celui des mères tuteur et autres sont de 1.
+#Le minimum de tuteur autre est de 7 alors que pour mère et père tuteur celui ci est égale ou inférieur à 5. Par contre, le maximum est de 16 alors que celui du tuteur mère est de 20 et tuteur père est de 18. La boite à moustache de autre tuteur est plus petit, ce qui signifie que les notes se concentre généralement autour de 9 et 12 alors que les 2 autres sont autour de 10 et 14. 
 
-# Analyse de la consommation dâ€™alcool durant le travail en semaine (Dalc) et la consommation dâ€™alcool durant le week-end
-# (Walc) selon le genre : Valeurs numÃ©riqueÂ : 1 â€“ Equivaut a tres faible et 5 â€“ equivaut Ã  tres elevee. 
-#A travers le nuage de points ce que l'on peut voir selon la consommation d'alcool pendant le travail en semaine 
-#(Dalc) et en week-end (Walc)  câ€™est quâ€™il y a peu de consommation dâ€™alcool que ce soit pour les homme ou pour les femmes,
-#les points Ã©tant principalement concentrer entre le nombre 1 et 1,5. 
-#Les femmes Ã  part quelques occurrences (certain point compris au-delÃ  de 5), boivent moins que les hommes qui sont
-#plus nombreux Ã  boire durant le travail en semaine (une importante rÃ©partition de points entre le 4 et le 5). 
+table(fulldt$famrel, fulldt$Dalc)
 
-#Pour la consommation dâ€™alcool durant le week-end (Walc), il y a Ã©galement peu de consommation 
-#(majoritÃ© Ã©tant compris dans le 1) que ce soit pour les hommes ou pour les femmes . Il y a plus de consommation de la part
-#des hommes durant le week end les points bleu Ã©tant compris entre le 4 et le 5. Il y a une augmentation de la consommation dâ€™alcool pour les hommes le week-end (points bleu compris entre le 4 et le 5). 
-
-#Selon notre nuages de points les hommes consomme plus dâ€™alcool le week-end (la majoritÃ© Ã©tant 
-#comprises dans le 4) que la semaine (la majoritÃ© Ã©tant comprises entre le 3 et 4). 
-
-#Les femmes consommerai plus dâ€™alcool durant le week-end (entre le 2 et le 3) quâ€™en semaine (majoritÃ© en 1). 
-
-
-
-
-#b)Recherche plus poussee des raisons d'une consommation d'alcool ?excessive? :
-#...
-
-
-#Consommation d'alcool selon la taille de la famille
-
-ggplot(fulldt) +
-  aes(x = Dalc, y = Walc, colour = famsize) +
-  geom_jitter() +
-  scale_color_viridis_d(option = "plasma", direction = 1) +
-  labs(
-    x = "Consommation alcool semaine",
-    y = "Consommation alcool weekend",
-    title = "Nuage de point consommation alcool en fonction du job de la mere"
-  ) +
-  theme_bw()
-
-
-
-
-#Structure Familiale
-#Travail sur la cohabitation des parents
-                 
-table(fulldt$Pstatus)
-mode(fulldt$Pstatus) 
-                    
-ggplot(fulldt) +
-  aes(x = Dalc, fill = Pstatus, colour = Pstatus) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  scale_color_hue(direction = 1) +
-  labs(
-    x = "Consommation en semaine",
-    y = "Effectifs",
-    title = "Consommation d'alcool en semaine selon la cohabitation parentale"
-  ) +
-  theme_minimal()
-                    
-ggplot(fulldt) +
-  aes(x = Walc, fill = Pstatus, colour = Pstatus) +
-  geom_histogram(bins = 30L) +
-  scale_fill_hue(direction = 1) +
-  scale_color_hue(direction = 1) +
-  labs(
-    x = "Consommation le weekend",
-    y = "Effectifs",
-    title = "Consommation d'alcool le weekend selon la cohabitation parentale"
-  ) +
-  theme_minimal()
-                    
-
-#Travail sur la qualitÃ© des relations familiales
-table(fulldt$famrel)
- 
 ggplot(fulldt)+
   aes(x=famrel, y=Walc, colour=famrel)+
   scale_fill_continuous()+
@@ -525,41 +572,6 @@ ggplot(fulldt)+
   labs(x="Relation familiale", y = "Consommation d alcool en semaine", title="Lien entre consommation d alcool en semaine et relation familiale")+
   theme_bw()
 
-      # Concernant les deux tableaux sur le lien entre relation familiale et consommation d'alcool (un pour la semaine et un pour le week end).
-      # On remarque une tendance generale sur les deux tableaux, etant que les reponses sont distribuees de facon assez uniforme a travers le nuage de points.
-      # Si les relations familiales impactaient la consommation d'alcool, on aurait du voir une concentration de point
-      # en haut Ã  gauche et en bas a droite des tableaux. Au lieu de ca, les points sont distribues de facon similaire
-      # entre ceux ayant les pires relations et ceux ayant les meilleures relations familiales. La seule difference est que l'on remarque
-      # que les gens ont tendance a plus consommer en week end qu'en semaine comme le confirme un de nos tableaux precedents.
-                    
-                    #Travail sur le responsable legal de l eleve
-                    
-                    table(fulldt$guardian)
-                    
-                    ggplot(fulldt)+
-                      aes(x = guardian, fill = guardian)+
-                      geom_histogram()+
-                      scale_fill_hue(direction = 1)+
-                      labs(x = "responsable legal", title = "test")+
-                      theme_bw()
-                    #Je voulais juste voir la rÃ©partion du pÃ¨re ou de la mÃ¨re mais la fonction table a suffit pour montrer 
-      
+#Concernant les deux tableaux sur le lien entre relation familiale et consommation d'alcool (un pour la semaine et un pour le week-end).
+#On remarque une tendance générale sur les deux tableaux, étant que les réponses sont distribuées de façon assez uniforme a travers le nuage de points. Si les relations familiales impactaient la consommation d'alcool, on aurait du voir une concentration de point en haut à gauche et en bas a droite des tableaux. Au lieu de ca, les points sont distribues de façon similaire entre ceux ayant les pires relations et ceux ayant les meilleures relations familiales. La seule différence est que l'on remarque que les gens ont tendance a plus consommer en week-end qu'en semaine comme le confirme un de nos tableaux précédents.
 
-                    # La consommation d'alcool le week-end selon l'origine sociale 
-                    
-                    
-                    ggplot(fulldt) +
-                      
-                      aes(x = Dalc, y = Medu, fill = Medu) +
-                      geom_boxplot(fill = "#BDD3E8") +
-                      scale_fill_brewer(palette = "OrRd", direction = 1) +
-                      labs(x = "Conso alc semaine", y = "etudes mere", title = "Boxplot") +
-                      theme_bw()
-                    
-                    ggplot(fulldt) +
-                      aes(x = Dalc, y = Fedu, fill = Fedu) +
-                      geom_boxplot(fill = "#BDD3E8") +
-                      scale_fill_brewer(palette = "OrRd", direction = 1) +
-                      labs(x = "Conso alc semaine", y = "etudes pere", title = "Boxplot") +
-                      theme_bw()
-           
