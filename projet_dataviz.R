@@ -3,6 +3,7 @@ path <- file.path("C:", "Users", "tekgo", "Documents", "GitHub", "dataviz", fsep
 setwd(path)
 
 #Version de R : R version 4.1.3 (2022-03-10)
+#La répartition du travail est disponible sur GitHub
 
 #Téléchargement des librairies 
 library(readr)
@@ -574,4 +575,3 @@ ggplot(fulldt)+
 
 #Concernant les deux tableaux sur le lien entre relation familiale et consommation d'alcool (un pour la semaine et un pour le week-end).
 #On remarque une tendance générale sur les deux tableaux, étant que les réponses sont distribuées de façon assez uniforme a travers le nuage de points. Si les relations familiales impactaient la consommation d'alcool, on aurait du voir une concentration de point en haut à gauche et en bas a droite des tableaux. Au lieu de ca, les points sont distribues de façon similaire entre ceux ayant les pires relations et ceux ayant les meilleures relations familiales. La seule différence est que l'on remarque que les gens ont tendance a plus consommer en week-end qu'en semaine comme le confirme un de nos tableaux précédents.
-
