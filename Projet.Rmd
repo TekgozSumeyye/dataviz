@@ -3,6 +3,7 @@ title: "Projet outils et logiciels d'analyse des données"
 author: "Tekgoz Sumeyye"
 date: '2022-12-11'
 output:
+  pdf_document: default
   html_document: default
 ---
 
@@ -235,7 +236,7 @@ Il y a beaucoup plus de consommation le weekend, étant donné qu'il n'y a pas c
 
 
 ##### Impact de l'alcool sur les notes G3
-```{r}
+```{r , fig.align='center'}
 ggplot(fulldt) +
   aes(x = Dalc, y = G3, colour = Dalc) +
   geom_jitter(size = 1.5) +
@@ -250,7 +251,7 @@ ggplot(fulldt) +
 
 Grace au nuage de point, on remarque que les élèves qui ont obtenue de mauvaises notes (0) sont généralement des élèves consommant très peu d'alcool, on ne retrouve pas d'élèves consommant beaucoup d'alcool dans les mauvaises notes. De plus, très peu d'élèves consomment excessivement de l'alcool en semaine, et ces élèves ont des notes obtenue entre 5 et 15. De plus, les consommateurs modérés, ont généralement des notes compris entre 7.5 et 17.5, quelques personnes se démarques en ayant obtenue de très bonne note, ce sont souvent des élèves consommant très peu d'alcool. 
 
-```{r}
+```{r, fig.align='center'}
 cor1 <- G3 ~ Walc + Dalc
 lm1<-lm(cor1 , data = fulldt)
 coefplot(lm1 , outerCI = 1.96 , intercept = FALSE)
@@ -261,7 +262,7 @@ Les deux coefficients est négative, mais l'intervalle de confiance de Walc couv
 Cela peut être dû au fait qu'en semaine, les personnes consommant de l'alcool ne se concentre pas aux révisions donc leurs notes sont impactés. 
 
 ##### Impact de l'âge sur la consommation de l'alcool
-```{r}
+```{r, , fig.align='center'}
 cor2 <- age ~ Walc + Dalc
 lm2<-lm(cor2 , data = fulldt)
 coefplot(lm2 , outerCI = 1.96 , intercept = FALSE)
@@ -272,7 +273,7 @@ Les deux coefficient sont positifs, mais étant donné que l'intervalle de confi
 La consommation d'alcool en semaine dépend plus de l'âge que la consommation le weekend, c'est à dire que par exemple, en fonction de l'age, les personnes font plus attention à leurs consommations d'alcool en semaine que le weekend.
 
 ##### Impact du sexe sur la consommation de l'alcool
-```{r}
+```{r , fig.align='center'}
 ggplot(fulldt, aes(x = Walc, y = Dalc , color = sex))+   geom_jitter(position=position_jitter(0.2))
 ```
 Analyse de la consommation d'alcool durant le travail en semaine (Dalc) et la consommation d'alcool durant le week-end
@@ -585,11 +586,11 @@ ggplot(fulldt) +
 
 Les personnes qui bénéficie d'un soutient scolaire ne boivent presque pas d'alcool en semaine, seulement 12,5% consomment très peu et 15% consomment beaucoup d'alcool en semaine. 
 
-
+  
 ### 2. Visualisation des facteurs impactant les notes G3
 
 ##### Impact de l'école sur les notes G3
-```{r}
+```{r, , fig.align='center'}
 ggplot(fulldt) +
   aes(x = Dalc, y = Walc, colour = school, size = G3) +
   geom_jitter() +
@@ -633,7 +634,7 @@ Cela s'explique que les notes des filles sont similaires et que globalement les 
 
 ##### Impact du métier de la mère sur les notes G3
 
-```{r}
+```{r, fig.align='center'}
 ggplot(fulldt) +
   aes(x = G3, y = Mjob, fill = Mjob) +
   geom_boxplot() +
@@ -654,7 +655,7 @@ Par contre, l'écart interquartile est vraiment important pour les mères-sante,
 
 ##### Impact du métier du père sur les notes G3
 
-```{r}
+```{r, fig.align='center'}
 ggplot(fulldt) +
   aes(x = G3, y = Fjob, fill = Fjob) +
   geom_boxplot() +
@@ -670,7 +671,7 @@ La boites à moustache de père-professeur est particulièrement différentes de
 
 ##### Impact du tuteur sur les notes G3
 
-```{r}
+```{r , fig.align='center'}
 ggplot(fulldt) +
   aes(x = G3, y = guardian, fill = guardian) +
   geom_boxplot() +
